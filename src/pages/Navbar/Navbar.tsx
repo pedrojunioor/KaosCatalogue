@@ -9,12 +9,7 @@ const Navbar = () => {
     const history = useHistory()
     const { user, sigInWithGoogle } = useAuth()
     
-    useEffect(()=>{
-        console.log(user)
-    },[user])
-    console.log(user)
-
-    async function handleCreateExtension() {
+    async function isLogged() {
         if (!user) {
             await sigInWithGoogle()
         }
@@ -39,9 +34,10 @@ const Navbar = () => {
                     Construct
                 </Button>
 
-                <Button onClick={handleCreateExtension}>
+                <Button onClick={isLogged}>
                     Form Extensions
                 </Button>
+
                 <Button onClick={() => { history.push('/extensions/report')}}>
                     Form Report
                 </Button>

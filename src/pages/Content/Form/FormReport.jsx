@@ -1,9 +1,22 @@
 import './FormReport.scss'
 import React from 'react'
+import { useHistory } from 'react-router-dom'
+import { useAuth } from '../../../hooks/useAuth'
 import '../template-content.scss'
-import UseForm from './UseForm'
+
 
 const FormReport = () => {
+
+    const history = useHistory()
+    const { user, sigInWithGoogle } = useAuth()
+    
+    async function handleCreateExtension() {
+        if (!user) {
+            await sigInWithGoogle()
+        }
+        history.push('/extensions/new')
+    }
+
     return (
         <div className="content">
             <form action="" className="form-report">
