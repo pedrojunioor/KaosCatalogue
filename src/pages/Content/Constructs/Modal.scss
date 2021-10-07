@@ -1,0 +1,20 @@
+.layout{
+    position: absolute;
+    left: 20px;
+    background-color: white;
+    max-width:200px;
+    max-height: 400px;
+    font-size:14px;
+    margin-top: -120px;
+    margin-left: 40px;
+    border: 1px solid black;
+
+    >p{
+        margin-left: 4px;
+    }
+    >td{
+        width: 40px;
+        height: 40px;
+        border: none
+    }
+}

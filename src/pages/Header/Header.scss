@@ -1,0 +1,68 @@
+.template-catalogue{
+    grid-area: header;
+}
+.catalogue-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 20px 40px;
+    padding: 20px;
+    border-radius: 1%;
+    border-bottom: 1px solid;
+
+}
+
+.login-button{
+         height: 50px;
+         border-radius: 8px;
+         font-weight: 500;
+         background: red;
+
+         height:40px;
+         width: 100px;
+
+         color: white;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-right: 20px;
+
+         cursor: pointer;
+         border: 0;
+         gap: 10px;
+}
+span{
+    font-size: 30px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.user-area{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+
+}
+.user{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    // border: 2px solid #ccc;
+    border-radius: 5%;
+    
+    
+    >img{
+        border:2px solid #ccc;
+        border-radius: 50%;
+        width:35px;
+        height: 35px;
+      
+    }
+    > span{
+        padding: 0px 12px;
+        font-size: 18px;
+    }
+}

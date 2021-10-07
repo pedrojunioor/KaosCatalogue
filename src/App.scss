@@ -1,0 +1,9 @@
+.App{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20vh 10vh 60vh 10vh;
+    grid-template-areas: "header"
+                        "navbar"
+                        "content"
+                        "footer"
+}

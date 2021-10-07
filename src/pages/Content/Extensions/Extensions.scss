@@ -1,0 +1,24 @@
+.caption{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+
+.extensions{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-radius: 1px solid;
+}

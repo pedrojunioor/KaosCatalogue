@@ -1,0 +1,19 @@
+.cardextension{
+    weight: 100%;
+}
+
+.extension{
+    display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 30px 60px;
+
+    >div{
+        display: flex;
+
+        >span{
+            font-weight: bold;
+        }
+    }
+
+    
+}

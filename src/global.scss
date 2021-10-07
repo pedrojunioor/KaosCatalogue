@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, input, button, textarea {
+    font: 400 16px 'Roboto', sans-serif;
+
+}
+
+body{
+    background: #E0EAFC; 
+    background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  
+    background: linear-gradient(to right, #CFDEF3, #E0EAFC); 
+}
