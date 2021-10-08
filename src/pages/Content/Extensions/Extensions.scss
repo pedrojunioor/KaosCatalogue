@@ -1,3 +1,15 @@
+.content{
+    display:flex;
+    flex-direction: column;
+}
+
+.menu-busca{
+    display:flex;
+    justify-content: center;
+    gap: 10px;
+    font: 400 16px 'Roboto', sans-serif;
+}
+
 .caption{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

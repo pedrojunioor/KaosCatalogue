@@ -4,7 +4,7 @@ import React,{useState, FormEvent} from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
 import { Button } from '../../../component/Button'
-import {database, firebase} from '../../../services/firebase'
+import {database} from '../../../services/firebase'
 import './Form.scss'
 
 const FormExtension = () => {
@@ -23,21 +23,23 @@ const FormExtension = () => {
     const [applicationAreaState, setApplicationAreaState] = useState('')
     
     async function handleCreateExtension(event: FormEvent) {
-      event.preventDefault();
+        event.preventDefault();
 
-    const extensionRef = database.ref('extensions')
-    const firebaseExtension = await extensionRef.push({
-        userId: user.id,
-        title: titleState,
-        author: authorState,
-        datePublication: datePublicationState,
-        source: sourceState,
-        sourceLocation: sourceLocationState,
-        extensionDerivative: extensionDerivativeState,
-        extensionBase: extensionBaseState,
-        validationForm: validationFormState,
-        applicationArea: applicationAreaState,
-    })
+        const extensionRef = database.ref('extensions')
+        const firebaseExtension = await extensionRef.push({
+            userId: user.id,
+            title: titleState,
+            author: authorState,
+            datePublication: datePublicationState,
+            source: sourceState,
+            sourceLocation: sourceLocationState,
+            extensionDerivative: extensionDerivativeState,
+            extensionBase: extensionBaseState,
+            validationForm: validationFormState,
+            applicationArea: applicationAreaState,
+        })
+
+        history.push(`/extension/${firebaseExtension.key}`)
 
     }
 
@@ -85,16 +87,7 @@ const FormExtension = () => {
                             onChange={event => setSourceLocationState(event.target.value)}
                             value={sourceLocationState}
                         />
-                        <div className="input-select">
-                            <label>Form Validation</label>
-                            <select value={validationFormState} onChange={event =>setValidationFormState(event.target.value)}>
-                                <option value="casestudy">Case Study</option>
-                                <option value="experiment">Experiment</option>
-                                <option value="exampleofuse">Example of use</option>
-                                <option value="quiz">Quiz</option>
-                                <option value="notpresentedevaluation">Not presented evaluation</option>
-                            </select>
-                        </div>
+                        
                          <div className="input-select">
                             <label>Extension Derivative</label>
                             <select value={extensionDerivativeState} onChange={event =>setExtensionDerivativeState(event.target.value)}>
@@ -109,7 +102,16 @@ const FormExtension = () => {
                             onChange={event => setExtensionBaseState(event.target.value)}
                             value={extensionBaseState}
                         />
-
+                        <div className="input-select">
+                            <label>Form Validation</label>
+                            <select value={validationFormState} onChange={event =>setValidationFormState(event.target.value)}>
+                                <option value="casestudy">Case Study</option>
+                                <option value="experiment">Experiment</option>
+                                <option value="exampleofuse">Example of use</option>
+                                <option value="quiz">Quiz</option>
+                                <option value="notpresentedevaluation">Not presented evaluation</option>
+                            </select>
+                        </div>
                         <div className="input-select">
                             <label>Application Area:</label>
                             <select value={applicationAreaState} onChange={event =>setApplicationAreaState(event.target.value)}>
