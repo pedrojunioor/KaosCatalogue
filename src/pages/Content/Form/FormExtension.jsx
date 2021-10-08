@@ -11,30 +11,32 @@ const FormExtension = () => {
 
     const history = useHistory()
     const { user, sigInWithGoogle } = useAuth()
-    // console.log(user.id)
-
+    
     const [titleState, setTitleState] = useState('')
     const [authorState, setAuthorState] = useState('')
-    const [datePublicationState, setDatePublicationState] = useState()
-    const [sourceState, setSourceState] = useState()
-    const [aplicationAreaState, setAplicationAreaState] = useState()
+    const [datePublicationState, setDatePublicationState] = useState('')
+    const [sourceState, setSourceState] = useState('')
+    const [sourceLocationState, setSourceLocationState] = useState('')
+    const [extensionDerivativeState,setExtensionDerivativeState] = useState('')
+    const [extensionBaseState,setExtensionBaseState] = useState('')
+    const [validationFormState,setValidationFormState] = useState('')
+    const [applicationAreaState, setApplicationAreaState] = useState('')
     
     async function handleCreateExtension(event: FormEvent) {
       event.preventDefault();
-    //   console.log('title',title)
-    //   console.log('author',author)
-    //   console.log('date',datePublication)
-    //   console.log('source',source)
-    //   console.log('aplicationArea',aplicationArea)
 
-    const extensionRef = database.ref('entensions')
+    const extensionRef = database.ref('extensions')
     const firebaseExtension = await extensionRef.push({
         userId: user.id,
         title: titleState,
         author: authorState,
         datePublication: datePublicationState,
         source: sourceState,
-        aplicationArea: aplicationAreaState
+        sourceLocation: sourceLocationState,
+        extensionDerivative: extensionDerivativeState,
+        extensionBase: extensionBaseState,
+        validationForm: validationFormState,
+        applicationArea: applicationAreaState,
     })
 
     }
@@ -71,15 +73,57 @@ const FormExtension = () => {
                             <label>Source</label>
                             <select value={sourceState} onChange={event =>setSourceState(event.target.value)}>
                                 <option value="Journal">Journal</option>
-                                <option value="Article">Article</option>
+                                <option value="Conference">Conference</option>
+                                <option value="Workshop">Workshop</option>
                                 <option value="Others">Others</option>
                             </select>
                         </div>
+                        <label>Source Location</label>
+                        <input
+                            type="text"
+                            placeholder="SourceLocation"
+                            onChange={event => setSourceLocationState(event.target.value)}
+                            value={sourceLocationState}
+                        />
                         <div className="input-select">
-                            <label>Aplication Area:</label>
-                            <select value={aplicationAreaState} onChange={event =>setAplicationAreaState(event.target.value)}>
-                                <option value="Area1">Area1</option>
-                                <option value="Area2">Area2</option>
+                            <label>Form Validation</label>
+                            <select value={validationFormState} onChange={event =>setValidationFormState(event.target.value)}>
+                                <option value="casestudy">Case Study</option>
+                                <option value="experiment">Experiment</option>
+                                <option value="exampleofuse">Example of use</option>
+                                <option value="quiz">Quiz</option>
+                                <option value="notpresentedevaluation">Not presented evaluation</option>
+                            </select>
+                        </div>
+                         <div className="input-select">
+                            <label>Extension Derivative</label>
+                            <select value={extensionDerivativeState} onChange={event =>setExtensionDerivativeState(event.target.value)}>
+                                <option value="yes">Yes</option>
+                                <option value="not">Not</option>
+                            </select>
+                        </div>
+                        <label>Base Extension</label>
+                        <input
+                            type="text"
+                            placeholder="Base Extension"
+                            onChange={event => setExtensionBaseState(event.target.value)}
+                            value={extensionBaseState}
+                        />
+
+                        <div className="input-select">
+                            <label>Application Area:</label>
+                            <select value={applicationAreaState} onChange={event =>setApplicationAreaState(event.target.value)}>
+                                <option value="Adaptive Systems">Adaptive Systems</option>
+                                <option value="webservices">Web Services</option>
+                                <option value="aspects">Aspects</option>
+                                <option value="risks">Risks</option>
+                                <option value="safety">Safety</option>
+                                <option value="autonomicsystems">Autonomic Systems</option>
+                                <option value="organizational-businessprocess">Organizational/Business Process</option>
+                                <option value="security-privacy-vulnerability">Security/Privacy/Vulnerability</option>
+                                <option value="businesscontinuity">Business continuity</option>
+                                <option value="escalabilidade">Escalabilidade</option>
+                                <option value="ambientsystems">Ambient Systems</option>
                                 <option value="Others">Others</option>
                             </select>
                         </div>
