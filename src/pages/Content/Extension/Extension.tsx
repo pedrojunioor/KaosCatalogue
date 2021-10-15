@@ -6,6 +6,7 @@ import { Button } from '../../../component/Button'
 import {database, firebase} from '../../../services/firebase'
 import FormConstruct from '../Constructs/FormConstruct'
 import './Extension.scss'
+import Card from '../Layout/Card'
 
 type FirebaseConstructs = Record<string, {
     area: string,
@@ -25,8 +26,26 @@ type Construct = {
     register: string,
     type: string
 }
+type FirebaseExtensions = Record<string, {
+    applicationArea: string,
+    author: string,
+    constructs: Construct[],
+    datePublication: string,
+    extensionBase: string,
+    extensionDerivative: string,
+    source:string,
+    sourceLocation: string,
+    title: string,
+    userId: string,
+    validationForm: string,
+    metamodelcompleteness: string,
+    syntaxlevel: string,
+    toolsuport: string,
+    definitionofconcepts: string
+}>
+
 type Extension = {
-    id: string,
+    
     applicationArea: string,
     author: string,
     constructs?: Construct[],
@@ -38,6 +57,10 @@ type Extension = {
     title: string,
     userId: string,
     validationForm: string,
+    metamodelcompleteness: string,
+    syntaxlevel: string,
+    toolsuport: string,
+    definitionofconcepts: string
 }
 
 type extensionParams = {
@@ -62,65 +85,89 @@ const Extension = () => {
         }
     }
 
+    // function showExtension(extension : Extension) {
+    //     if(extension !== undefined) {
+            
+    //         return <div key={extension.title} className="extensions">
+    //             <span>{extension.title} </span>
+    //             <span>{extension.author} </span>
+    //             <span>{extension.datePublication}</span>
+    //             <span>{extension.source}</span>
+    //         </div>
+    //     }
+    //     else{
+    //         return <div>
+    //             AA
+    //         </div>
+    //     }
+    // }
     function showExtension(extension : Extension) {
-        if(extension !== undefined) {
-            return <div key={extension.title} className="extensions">
-                <span>{extension.title} </span>
-                <span>{extension.author} </span>
-                <span>{extension.datePublication}</span>
-                <span>{extension.source}</span>
-            </div>
-        }
-        else{
-            return <div>
-                AA
-            </div>
+        console.log('EXTENSAO',extension)
+        if(extension !== undefined){
+            return Object.keys(extension).map(item =>{
+                console.log(item)
+                    return <Card titulo={item}>
+                        {extension[item]}
+                    </Card>
+                   
+                       
+            })
         }
     }
 
+
+
+    // useEffect(()=>{
+    //     showExtension(extension);
+    // },[extension])
+  
     useEffect(() => {
         const extensionRef = database.ref(`extensions/${extensionId}`);
-        
         extensionRef.on('value', extension => {
-            console.log(extension.val().constructs);
             const databaseExtension = extension.val()
-            const firebaseConstructs:FirebaseConstructs = databaseExtension.constructs ?? {}; 
-            const parsedExtension = Object.entries(firebaseConstructs).map(([key,value]) => {
-                return{
-                    id: key,
-                    area: value.area,
-                    concept: value.concept,
-                    description: value.description,
-                    form: value.form,
-                    register: value.register,
-                    type: value.type
-
-                }
-            })
+            const firebaseConstructs:FirebaseConstructs = databaseExtension.constructs ?? {};
+            if(firebaseConstructs !== undefined){
+                const parsedExtension = Object.entries(firebaseConstructs).map(([key,value]) => {
+                    return{
+                        id: key,
+                        area: value.area,
+                        concept: value.concept,
+                        description: value.description,
+                        form: value.form,
+                        register: value.register,
+                        type: value.type
+    
+                    }
+                })
             setTitle(databaseExtension.title)
             setConstructs(parsedExtension)
+                
+            }
+            
+            
         })
 
     },[extensionId]);
 
     useEffect(() => {
         const extensionRef = database.ref(`extensions/${extensionId}`);
-        
         extensionRef.on('value', extension => {
             const databaseExtension = extension.val()
-            console.log(databaseExtension)
             const parsedExtension = {
-                    id: databaseExtension.id,
                     applicationArea: databaseExtension.applicationArea,
                     author: databaseExtension.author,
                     datePublication: databaseExtension.datePublication,
-                    extensionBase: databaseExtension.extensionBase,
                     extensionDerivative: databaseExtension.extensionDerivative,
+                    extensionBase: databaseExtension.extensionBase,
                     source: databaseExtension.source,
                     sourceLocation: databaseExtension.sourceLocation,
-                    title: databaseExtension.title,
-                    userId: databaseExtension.userId,
+                    // title: databaseExtension.title,
+                    // userId: databaseExtension.userId,
                     validationForm: databaseExtension.validationForm,
+                    metamodelcompleteness: databaseExtension.metamodelCompletenessState,
+                    syntaxlevel: databaseExtension.syntaxLevelState,
+                    toolsuport: databaseExtension.toolSupportState,
+                    definitionofconcepts: databaseExtension.definitionofConceptsState
                 }
                 setExtension(parsedExtension)
             }
@@ -129,18 +176,23 @@ const Extension = () => {
 
     return (
         <div className="content">
-        <div>
-            <h1>{title}</h1>
-            {constructs.length > 0 && <p> {constructs.length} Constructs</p> }
-        </div>
+            
            
-            <Button
+            {/* <Button
                 onClick={()=>isAdmin()}>
                 Add Construct
-            </Button>
-            {showExtension(extension)}
-            {showForm && <FormConstruct/>}
-            {JSON.stringify(constructs)}
+            </Button> */}
+            
+            <Card titulo={title}>
+                <div className="Cards">
+                    {showExtension(extension)}
+                </div>
+            </Card>
+            
+        
+            
+            {/* {showForm && <FormConstruct/>} */}
+    
         </div>
     )
 }

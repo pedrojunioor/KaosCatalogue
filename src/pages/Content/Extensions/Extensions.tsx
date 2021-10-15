@@ -29,6 +29,10 @@ type FirebaseExtensions = Record<string, {
     title: string,
     userId: string,
     validationForm: string,
+    metamodelcompleteness: string,
+    syntaxlevel: string,
+    toolsuport: string,
+    definitionofconcepts: string
 }>
 
 type Extension = {
@@ -44,6 +48,10 @@ type Extension = {
     title: string,
     userId: string,
     validationForm: string,
+    metamodelcompleteness: string,
+    syntaxlevel: string,
+    toolsuport: string,
+    definitionofconcepts: string
 }
 
 
@@ -118,6 +126,10 @@ const Extensions = () => {
                     title: value.title,
                     userId: value.userId,
                     validationForm: value.validationForm,
+                    metamodelcompleteness: value.metamodelcompleteness,
+                    syntaxlevel: value.syntaxlevel,
+                    toolsuport: value.toolsuport,
+                    definitionofconcepts: value.definitionofconcepts
                 }
             })
             setExtensions(parsedExtension)
@@ -127,14 +139,13 @@ const Extensions = () => {
 
     return (
         <div className="content">
-        <h2>Extension List</h2>
             <form className="menu-busca" onSubmit={handleJoinExtensionSearch} >
-                {/* <select value={filterState} onChange={event =>setFilterState(event.target.value)}>
+                <select value={filterState} onChange={event =>setFilterState(event.target.value)}>
                     <option value="author">Author</option>
                     <option value="year">Year</option>
                     <option value="applicationarea">ApplicationArea</option>
                     <option value="source">Source</option>
-                </select> */}
+                </select>
                 <input
                     type="text"
                     placeholder="..."
@@ -144,7 +155,7 @@ const Extensions = () => {
                 <button type="submit"> Search </button>
             </form>
 
-            <Card>
+            <Card titulo="Extensions">
                 <div className="caption">
                     <span>Title</span>
                     <span>Author</span>

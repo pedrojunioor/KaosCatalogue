@@ -18,10 +18,16 @@
     margin: 10px;
     flex: 1;
     color: #000;
-    font: 400 4px 'Roboto', sans-serif;
+    font: 400 16px 'Roboto', sans-serif;
+    text-align: center;
 }
 
 .Card .Label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
     background-color: #000;
     color: #fff;
+
 }

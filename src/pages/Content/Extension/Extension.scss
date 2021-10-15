@@ -1,19 +1,10 @@
-.cardextension{
-    weight: 100%;
+.content{
+    display: flex;
+    flex-direction: column;
+   
 }
 
-.extension{
-    display: grid;
-   grid-template-columns: 1fr 1fr;
-   gap: 30px 60px;
-
-    >div{
-        display: flex;
-
-        >span{
-            font-weight: bold;
-        }
-    }
-
-    
+.Cards{
+    display: flex;
+    flex-wrap: wrap;
 }

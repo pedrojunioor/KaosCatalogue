@@ -3,13 +3,18 @@
         "applicationarea",
         "casestudy",
         "datepublication",
+        "definitionofconcepts",
         "encontrada",
         "exampleofuse",
         "extensionbase",
         "extensionderivative",
+        "metamodelcompleteness",
         "notpresentedevaluation",
         "publicação",
         "sourcelocation",
+        "syntaxlevel",
+        "titulo",
+        "toolsuport",
         "validationform"
     ]
 }
