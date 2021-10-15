@@ -140,19 +140,27 @@ const Extensions = () => {
     return (
         <div className="content">
             <form className="menu-busca" onSubmit={handleJoinExtensionSearch} >
-                <select value={filterState} onChange={event =>setFilterState(event.target.value)}>
-                    <option value="author">Author</option>
-                    <option value="year">Year</option>
-                    <option value="applicationarea">ApplicationArea</option>
-                    <option value="source">Source</option>
-                </select>
-                <input
-                    type="text"
-                    placeholder="..."
-                    onChange={event => setFilterState(event.target.value)}
-                    value={filterState}
-                />
-                <button type="submit"> Search </button>
+                <div className="input-select">
+                    <select value={filterState} onChange={event =>setFilterState(event.target.value)}>
+                        <option value="author">Author</option>
+                        <option value="year">Year</option>
+                        <option value="applicationarea">ApplicationArea</option>
+                        <option value="source">Source</option>
+                    </select>
+                </div>
+                <div className="input-text">
+                 <input
+                        type="text"
+                        placeholder="..."
+                        onChange={event => setFilterState(event.target.value)}
+                        value={filterState}
+                    />
+                </div>
+                <div>
+                    <Button type="submit"> Search</Button>
+                </div>
+                   
+                   
             </form>
 
             <Card titulo="Extensions">

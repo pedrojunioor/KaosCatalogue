@@ -1,14 +1,17 @@
 import './FormReport.scss'
-import React from 'react'
+import React,{useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
-import '../template-content.scss'
-
+import { Button } from '../../../component/Button';
 
 const FormReport = () => {
 
     const history = useHistory()
     const { user, sigInWithGoogle } = useAuth()
+
+    const [ titleState, setTitleState ] = useState('');
+	const [ authorState, setAuthorState ] = useState('');
+	const [ linkState, setLinkState ] = useState('');
     
     async function handleCreateExtension() {
         if (!user) {
@@ -18,28 +21,37 @@ const FormReport = () => {
     }
 
     return (
-        <div className="content">
-            <form action="" className="form-report">
-                <label>
-                    Nome:
-                </label>
-                <input type="text" className="text" />
-                <label>
-                    Link:
-                </label>
-                <input type="text" className="text" />
-                <label>
-                    Data de publicação:
-                </label>
-                <input type="text" className="text" />
-                <div>
-                <button type="submit" className="submit">
-                    Enviar
-                </button>
+        <div className="root">
+			<div className="main">
+				<div className="form-input">
+					<form onSubmit={handleCreateExtension}>
+						<label>Titulo</label>
+						<input
+							type="text"
+							placeholder="Digite o Titulo"
+							onChange={(event) => setTitleState(event.target.value)}
+							value={titleState}
+						/>
+						<label>Author</label>
+						<input
+							type="text"
+							placeholder="Author"
+							onChange={(event) => setAuthorState(event.target.value)}
+							value={authorState}
+						/>
+						<label>Link</label>
+						<input
+							type="text"
+							placeholder="Enter the link to access the extension"
+							onChange={(event) => setLinkState(event.target.value)}
+							value={linkState}
+						/>
+                        <div className="button-submit">
+                            <Button type="submit">Report</Button>
+                        </div>
+                    </form>
                 </div>
-             
-            </form>
-
+            </div>
         </div>
     )
 }

@@ -1,7 +1,18 @@
-.home{
-    font-size: 50px;
+.text-initial{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    >p{
+        text-align: start;
+        font: 400 20px 'Roboto', sans-serif;
+    }
 
+    >ul{
+        text-align: start;
+        font: 400 16px 'Roboto', sans-serif;
+    }
+   
 }
-h1{
-    justify-content: center;
-}
+
+   

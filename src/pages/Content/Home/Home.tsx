@@ -10,8 +10,8 @@ const Home = () => {
     return (
         <div className="content">
             <div className="home">
-                <Card title="Welcome" color="#bdc3c7">
-                    <div>
+                <Card titulo="Welcome">
+                    <div className="text-initial">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Enim dicta ut aspernatur culpa eius rerum consectetur id
                             magnam sequi! Aliquid hic voluptatum minus magnam ullam

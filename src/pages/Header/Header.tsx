@@ -21,7 +21,7 @@ const Header = () => {
     return (
         <div className="template-catalogue">
             <div className="catalogue-header">
-                <div>
+                <div className="initial">
                     <Link to="/"><span>KAOS Catalogue</span></Link>
                 </div>
                 <div className="user-area">
