@@ -1,24 +1,35 @@
-import './FormReport.scss'
+// import './FormReport.scss'
 import React,{useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
 import { Button } from '../../../component/Button';
+import { database } from '../../../services/firebase';
+import './Form.scss';
 
 const FormReport = () => {
 
     const history = useHistory()
     const { user, sigInWithGoogle } = useAuth()
+    console.log(user)
 
     const [ titleState, setTitleState ] = useState('');
 	const [ authorState, setAuthorState ] = useState('');
 	const [ linkState, setLinkState ] = useState('');
     
-    async function handleCreateExtension() {
-        if (!user) {
-            await sigInWithGoogle()
-        }
-        history.push('/extensions/new')
-    }
+    async function handleCreateExtension(event: FormEvent) {
+		event.preventDefault();
+
+		const extensionRef = database.ref('reportedextensions');
+		console.log('REF', extensionRef);
+		const firebaseExtension = await extensionRef.push({
+			userName: user.emaill,
+			title: titleState,
+			author: authorState,
+			link: linkState
+		});
+
+		// history.push(`/reportedextensions/`);
+	}
 
     return (
         <div className="root">

@@ -1,6 +1,6 @@
 // import '../template-content.scss'
 import React, { useState, FormEvent } from 'react';
-// import { FormEvent } from 'react'
+
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
 import { Button } from '../../../component/Button';
@@ -15,15 +15,15 @@ const FormExtension = () => {
 	const [ authorState, setAuthorState ] = useState('');
 	const [ datePublicationState, setDatePublicationState ] = useState('');
 	const [ sourceState, setSourceState ] = useState('others');
-    const [ validationFormState, setValidationFormState ] = useState('');
-    const [ applicationAreaState, setApplicationAreaState ] = useState('');
-    const [ metamodelCompletenessState, setMetamodelCompletenessState ] = useState('');
+	const [ validationFormState, setValidationFormState ] = useState('');
+	const [ applicationAreaState, setApplicationAreaState ] = useState('');
+	const [ metamodelCompletenessState, setMetamodelCompletenessState ] = useState('');
 	const [ sourceLocationState, setSourceLocationState ] = useState('');
 	const [ extensionDerivativeState, setExtensionDerivativeState ] = useState('not');
-	const [ extensionBaseState, setExtensionBaseState ] = useState('');	
+	const [ extensionBaseState, setExtensionBaseState ] = useState('');
 	const [ definitionofConceptsState, setDefinitionofConceptsState ] = useState('');
 	const [ syntaxLevelState, setSyntaxLevelState ] = useState('');
-	
+
 	const [ toolSupportState, setToolSupportState ] = useState('');
 
 	async function handleCreateExtension(event: FormEvent) {
@@ -52,7 +52,7 @@ const FormExtension = () => {
 	}
 
 	return (
-            <div className="root">
+		<div className="root">
 			<div className="main">
 				<div className="form-input">
 					<form onSubmit={handleCreateExtension}>
@@ -120,8 +120,12 @@ const FormExtension = () => {
 									<option value="risks">Risks</option>
 									<option value="safety">Safety</option>
 									<option value="autonomic-systems">Autonomic Systems</option>
-									<option value="organizational-business-process">Organizational/Business Process</option>
-									<option value="security-privacy-vulnerability">Security/Privacy/Vulnerability</option>
+									<option value="organizational-business-process">
+										Organizational/Business Process
+									</option>
+									<option value="security-privacy-vulnerability">
+										Security/Privacy/Vulnerability
+									</option>
 									<option value="business-continuity">Business continuity</option>
 									<option value="escalabilidade">Escalabilidade</option>
 									<option value="ambient-systems">Ambient Systems</option>
@@ -197,14 +201,13 @@ const FormExtension = () => {
 								/>
 							</div>
 						)}
-                        <div className="button-submit">
-                            <Button type="submit">Cadastrar Extensão</Button>
-                        </div>
-						
+						<div className="button-submit">
+							<Button type="submit">Cadastrar Extensão</Button>
+						</div>
 					</form>
 				</div>
 			</div>
-            </div>
+		</div>
 	);
 };
 

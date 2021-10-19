@@ -105,14 +105,19 @@ const Extension = () => {
         console.log('EXTENSAO',extension)
         if(extension !== undefined){
             return Object.keys(extension).map(item =>{
-                console.log(item)
-                    return <Card titulo={item}>
-                        {extension[item]}
-                    </Card>
-                   
-                       
-            })
-        }
+                    if(extension[item] !== undefined){
+                        return <Card titulo={item}>
+                                <span>{extension[item]}</span>
+                            </Card>
+                    }
+                    else{
+                        return <Card titulo={item}>
+                                <span>---</span>
+                            </Card>
+                    } 
+                      }
+                      ) 
+            }    
     }
 
 

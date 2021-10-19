@@ -25,6 +25,9 @@ const Navbar = () => {
                 <Button onClick={() => { history.push('/constructs') }}>
                     Constructs
                 </Button>
+                <Button onClick={() => { history.push('/reportedextensions') }}>
+                    Reported Extensions
+                </Button>
                 <Button onClick={isLogged}>
                     Form Extensions
                 </Button>
