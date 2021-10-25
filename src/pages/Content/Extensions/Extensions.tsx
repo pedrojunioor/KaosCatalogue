@@ -60,8 +60,11 @@ const Extensions = () => {
 
     const history = useHistory()
     const { user, sigInWithGoogle } = useAuth()
-    const [filterState, setFilterState] = useState('')
+    const [filterState, setFilterState] = useState('title')
+    const [parseState, setParseState] = useState('')
     const [extensions,setExtensions] = useState<Extension[]>([])
+    const [selected, setSelected] = useState<Extension[]>([])
+    const [filtered, setFiltered] = useState<Extension[]>([])
 
     function getExtensios(extensions : Extension[]) {
         return extensions.map(extension => {
@@ -80,17 +83,59 @@ const Extensions = () => {
     
     async function handleJoinExtensionSearch(event: FormEvent){
         event.preventDefault();
-        if(filterState.trim() === '') {
+        if(parseState.trim() === '') {
             return
         }
-        const extensionRef = await database.ref(`extensions/${filterState}`).get()
+        const extensionRef = await database.ref(`extensions/${parseState}`).get()
         console.log(extensionRef)
         if(!extensionRef.exists()){
             alert("Extension not found")
             return;
         }
-        history.push(`/extension/${filterState}`)
+        history.push(`/extension/${parseState}`)
     }
+
+    async function handleJoinExtensionSearchNew(event: FormEvent){
+        event.preventDefault();
+         setFiltered([])
+        if(parseState.trim() === '') {
+            return
+        }
+        const extensionRef = await database.ref(`extensions`).get()
+        if(!extensionRef.exists()){
+            alert("Extension not found")
+            return;
+        }
+
+        setSelected(extensionRef.val())
+        console.log('filter',filterState)
+        console.log('parse',parseState)
+    
+       
+        Object.keys(selected).forEach(key => {
+            Object.keys(selected[key]).forEach( item =>{
+               
+                if(item === filterState){
+                    if(selected[key][item].toLowerCase().includes(parseState.toLowerCase())){
+                        console.log('sel',selected[key])
+                        setFiltered([
+                            ...filtered,
+                            selected[key]
+                        ])
+                        console.log('FIL',filtered)
+                    }
+                    else{
+                        return
+                    }
+                }
+                else{
+                    return
+                }
+            })
+        })
+     
+    }
+
 
     async function handleJoinExtension(event: FormEvent, idExtension: string){
         event.preventDefault();
@@ -139,9 +184,10 @@ const Extensions = () => {
 
     return (
         <div className="content">
-            <form className="menu-busca" onSubmit={handleJoinExtensionSearch} >
+            <form className="menu-busca" onSubmit={handleJoinExtensionSearchNew} >
                 <div className="input-select">
                     <select value={filterState} onChange={event =>setFilterState(event.target.value)}>
+                        <option value="title">Title</option>
                         <option value="author">Author</option>
                         <option value="year">Year</option>
                         <option value="applicationarea">ApplicationArea</option>
@@ -152,8 +198,8 @@ const Extensions = () => {
                  <input
                         type="text"
                         placeholder="..."
-                        onChange={event => setFilterState(event.target.value)}
-                        value={filterState}
+                        onChange={event => setParseState(event.target.value)}
+                        value={parseState}
                     />
                 </div>
                 <div>

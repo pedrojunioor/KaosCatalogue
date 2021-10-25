@@ -15,16 +15,15 @@ const FormExtension = () => {
 	const [ authorState, setAuthorState ] = useState('');
 	const [ datePublicationState, setDatePublicationState ] = useState('');
 	const [ sourceState, setSourceState ] = useState('others');
-	const [ validationFormState, setValidationFormState ] = useState('');
+	const [ validationFormState, setValidationFormState ] = useState('case-study');
 	const [ applicationAreaState, setApplicationAreaState ] = useState('');
 	const [ metamodelCompletenessState, setMetamodelCompletenessState ] = useState('');
 	const [ sourceLocationState, setSourceLocationState ] = useState('');
 	const [ extensionDerivativeState, setExtensionDerivativeState ] = useState('not');
 	const [ extensionBaseState, setExtensionBaseState ] = useState('');
-	const [ definitionofConceptsState, setDefinitionofConceptsState ] = useState('');
+	const [ definitionofConceptsState, setDefinitionofConceptsState ] = useState('Definition is Presented');
 	const [ syntaxLevelState, setSyntaxLevelState ] = useState('');
-
-	const [ toolSupportState, setToolSupportState ] = useState('');
+	const [ toolSupportState, setToolSupportState ] = useState('not');
 
 	async function handleCreateExtension(event: FormEvent) {
 		event.preventDefault();
@@ -114,6 +113,7 @@ const FormExtension = () => {
 									value={applicationAreaState}
 									onChange={(event) => setApplicationAreaState(event.target.value)}
 								>
+                                    <option value="">-</option>
 									<option value="adaptive-systems">Adaptive Systems</option>
 									<option value="web-services">Web Services</option>
 									<option value="aspects">Aspects</option>
@@ -139,6 +139,7 @@ const FormExtension = () => {
 									value={metamodelCompletenessState}
 									onChange={(event) => setMetamodelCompletenessState(event.target.value)}
 								>
+									<option value="">-</option>
 									<option value="complete">Complete</option>
 									<option value="missing-nodes">Missing Nodes</option>
 									<option value="missing-links">Missing links</option>
@@ -148,13 +149,11 @@ const FormExtension = () => {
 
 							<div className="input-select">
 								<label>Syntax level:</label>
-								<select
-									value={syntaxLevelState}
-									onChange={(event) => setSyntaxLevelState(event.target.value)}
-								>
+								<select	value={syntaxLevelState}onChange={(event) => setSyntaxLevelState(event.target.value)}>
+                                    <option value="">-</option>
 									<option value="abstract-syntax">Abstract Syntax</option>
 									<option value="concrete-syntax">Concrete Syntax</option>
-									<option value="both">Both</option>
+									<option value="concrete-and-abstract">Both (Concrete and Abstract)</option>
 								</select>
 							</div>
 
@@ -164,8 +163,8 @@ const FormExtension = () => {
 									value={definitionofConceptsState}
 									onChange={(event) => setDefinitionofConceptsState(event.target.value)}
 								>
-									<option value="Features definition">Features definition</option>
-									<option value="Partially presents definition">Partially presents definition</option>
+									<option value="Definition is Presented">Definition is Presented</option>
+									<option value="Partially Presented">Partially Presented</option>
 								</select>
 							</div>
 

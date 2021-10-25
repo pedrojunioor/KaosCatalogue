@@ -101,6 +101,7 @@ const Extension = () => {
     //         </div>
     //     }
     // }
+    
     function showExtension(extension : Extension) {
         console.log('EXTENSAO',extension)
         if(extension !== undefined){
@@ -123,7 +124,7 @@ const Extension = () => {
 
 
     // useEffect(()=>{
-    //     showExtension(extension);
+    //     showExtension(extension); 
     // },[extension])
   
     useEffect(() => {
@@ -158,6 +159,7 @@ const Extension = () => {
         const extensionRef = database.ref(`extensions/${extensionId}`);
         extensionRef.on('value', extension => {
             const databaseExtension = extension.val()
+            console.log('EXTENSAOOOOOO',databaseExtension)
             const parsedExtension = {
                     applicationArea: databaseExtension.applicationArea,
                     author: databaseExtension.author,
@@ -169,10 +171,10 @@ const Extension = () => {
                     // title: databaseExtension.title,
                     // userId: databaseExtension.userId,
                     validationForm: databaseExtension.validationForm,
-                    metamodelcompleteness: databaseExtension.metamodelCompletenessState,
-                    syntaxlevel: databaseExtension.syntaxLevelState,
-                    toolsuport: databaseExtension.toolSupportState,
-                    definitionofconcepts: databaseExtension.definitionofConceptsState
+                    metamodelcompleteness: databaseExtension.metamodelcompleteness,
+                    syntaxlevel: databaseExtension.syntaxlevel,
+                    toolsuport: databaseExtension.toolsuport,
+                    definitionofconcepts: databaseExtension.definitionofconcepts
                 }
                 setExtension(parsedExtension)
             }
@@ -181,18 +183,18 @@ const Extension = () => {
 
     return (
         <div className="content">
-            
-           
-            {/* <Button
-                onClick={()=>isAdmin()}>
-                Add Construct
-            </Button> */}
-            
+                        
             <Card titulo={title}>
                 <div className="Cards">
                     {showExtension(extension)}
                 </div>
             </Card>
+            <div>
+            <Button
+                onClick={()=>isAdmin()}>
+                Add Construct
+            </Button>
+            </div>
             
         
             

@@ -10,8 +10,6 @@ const FormReport = () => {
 
     const history = useHistory()
     const { user, sigInWithGoogle } = useAuth()
-    console.log(user)
-
     const [ titleState, setTitleState ] = useState('');
 	const [ authorState, setAuthorState ] = useState('');
 	const [ linkState, setLinkState ] = useState('');
@@ -28,7 +26,7 @@ const FormReport = () => {
 			link: linkState
 		});
 
-		// history.push(`/reportedextensions/`);
+		history.push(`/`);
 	}
 
     return (
