@@ -1,12 +1,13 @@
-import React, { useState, FormEvent, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
 import { Button } from '../../../component/Button'
-import { database, firebase } from '../../../services/firebase'
-import FormConstruct from '../Constructs/FormConstruct'
-import './Extension.scss'
+import { database } from '../../../services/firebase'
 import Card from '../Layout/Card'
+import FormConstruct from '../Constructs/FormConstruct'
+
+import './Extension.scss'
 
 type FirebaseConstructs = Record<string, {
     area: string,
@@ -209,7 +210,7 @@ const Extension = () => {
                     Delete
                 </Button>
             </div>
-            {/* {showForm && <FormConstruct/>} */}
+            {showForm && <FormConstruct/>}
         </div>
     )
 }

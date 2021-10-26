@@ -7,7 +7,7 @@ import { useAuth } from '../../hooks/useAuth'
 const Header = () => {
 
     const history = useHistory()
-    const { user, sigInWithGoogle } = useAuth()
+    const { user, sigInWithGoogle, logout } = useAuth()
 
     async function singIn() {
         if (!user) {
@@ -16,6 +16,14 @@ const Header = () => {
         history.push('/')
     }
 
+    function singOut() {
+        if (user) {
+            if(window.confirm('Deseja efetuar o logout')){
+                logout()
+            }
+            return
+        }
+    }
 
     return (
         <div className="template-catalogue">
@@ -36,7 +44,7 @@ const Header = () => {
                     </button>}
                     {user && <button
                         className="login-button"
-                        onClick={() => { alert("LOGOUT") }}>
+                        onClick={singOut}>
                         <img src={googleIcon} alt="Logo do Google" />
                         Logout
                     </button>}

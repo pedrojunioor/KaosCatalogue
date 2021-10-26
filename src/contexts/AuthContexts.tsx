@@ -1,4 +1,3 @@
-
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import { auth, firebase } from '../services/firebase';
 
@@ -12,10 +11,11 @@ type User = {
 type AuthContextType = {
     user: User | undefined
     sigInWithGoogle: () => Promise<void>
+    logout: () => void
 
 }
 
-type AuthContextProviderProps ={
+type AuthContextProviderProps = {
     children: ReactNode
 }
 
@@ -39,6 +39,9 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
                     avatar: photoURL,
                     emaill: email
                 })
+            }
+            else{
+                setUser(undefined)
             }
         })
 
@@ -65,14 +68,18 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
                 emaill: email
             })
         }
+    }
+
+    function logout() {
+        firebase.auth().signOut()
 
     }
-    
+
     return (
         <div>
-            <AuthContext.Provider value={{ user, sigInWithGoogle }}>
+            <AuthContext.Provider value={{ user, sigInWithGoogle, logout }}>
                 {props.children}
-              </AuthContext.Provider>
+            </AuthContext.Provider>
         </div >
     )
 }

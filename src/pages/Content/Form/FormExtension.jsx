@@ -9,7 +9,7 @@ import './Form.scss';
 
 const FormExtension = () => {
 	const history = useHistory();
-	const { user, sigInWithGoogle } = useAuth();
+	const { user} = useAuth();
 
 	const [ titleState, setTitleState ] = useState('');
 	const [ authorState, setAuthorState ] = useState('');
