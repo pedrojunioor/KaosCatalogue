@@ -1,11 +1,8 @@
-import React,{useState, FormEvent, useEffect} from 'react'
+import React,{useState, useEffect} from 'react'
 
 import Card from '../Layout/Card'
 import './Extensions.scss'
-import { useHistory } from 'react-router-dom'
-import { useAuth } from '../../../hooks/useAuth'
-import { Button } from '../../../component/Button'
-import {database, firebase} from '../../../services/firebase'
+import {database} from '../../../services/firebase'
 
 type Construct = {
     id: string,
@@ -58,9 +55,6 @@ type Extension = {
 
 const ReportedExtension = () => {
 
-    const history = useHistory()
-    const { user, sigInWithGoogle } = useAuth()
-    const [filterState, setFilterState] = useState('')
     const [extensions,setExtensions] = useState<Extension[]>([])
 
     function getExtensios(extensions : Extension[]) {

@@ -1,5 +1,5 @@
 import './Navbar.scss'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { Button } from '../../component/Button'

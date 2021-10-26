@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import './Header.scss'
 import { Link, useHistory } from 'react-router-dom'
 import googleIcon from '../../assets/images/google-icon.svg'
-import { AuthContext } from '../../contexts/AuthContexts'
 import { useAuth } from '../../hooks/useAuth'
 
 const Header = () => {

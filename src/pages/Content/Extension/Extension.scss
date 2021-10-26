@@ -8,3 +8,23 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.button-delete{
+    height: 50px;
+    border-radius: 8px;
+    font-weight: 500;
+    background: red;
+
+    height:40px;
+    width: 100px;
+
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+
+    cursor: pointer;
+    border: 0;
+    gap: 10px;
+}

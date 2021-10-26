@@ -67,8 +67,9 @@ const Extensions = () => {
     const [filtered, setFiltered] = useState<Extension[]>([])
 
     function getExtensios(extensions : Extension[]) {
-        return extensions.map(extension => {
+        return extensions.map((extension,i)=> {
             return <div key={extension.title} className="extensions">
+                <span>{i+1}</span>
                 <span>{extension.title} </span>
                 <span>{extension.author} </span>
                 <span>{extension.datePublication}</span>
@@ -114,7 +115,6 @@ const Extensions = () => {
        
         Object.keys(selected).forEach(key => {
             Object.keys(selected[key]).forEach( item =>{
-               
                 if(item === filterState){
                     if(selected[key][item].toLowerCase().includes(parseState.toLowerCase())){
                         console.log('sel',selected[key])
@@ -211,6 +211,7 @@ const Extensions = () => {
 
             <Card titulo="Extensions">
                 <div className="caption">
+                    <span>-</span>
                     <span>Title</span>
                     <span>Author</span>
                     <span>Date</span>

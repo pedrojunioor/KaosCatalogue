@@ -54,7 +54,7 @@
 
 .caption{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr!important;
     align-items: center;
     justify-content: center;
     margin: 10px 10px 10px;
@@ -66,7 +66,7 @@
 
 .extensions{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr!important;
     align-items: center;
     justify-content: center;
     margin: 10px 10px 10px;
