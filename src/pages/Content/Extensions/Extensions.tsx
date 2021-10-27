@@ -74,7 +74,6 @@ const Extensions = () => {
                 <span>{extension.source}</span>
                 <Button onClick={e => handleJoinExtension(e,extension.id)}>Detalhes</Button>
             </div>
-
         })
     }
 
@@ -216,7 +215,6 @@ const Extensions = () => {
                 <div>
                     {getExtensios(extensions)}
                 </div>
-
             </Card>
 
 

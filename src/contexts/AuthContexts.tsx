@@ -1,4 +1,5 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useEffect, useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import { auth, firebase } from '../services/firebase';
 
 type User = {
@@ -12,7 +13,7 @@ type AuthContextType = {
     user: User | undefined
     sigInWithGoogle: () => Promise<void>
     logout: () => void
-
+    isLoggedIn: () => any
 }
 
 type AuthContextProviderProps = {
@@ -23,6 +24,7 @@ export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider(props: AuthContextProviderProps) {
 
+    const history = useHistory()
     const [user, setUser] = useState<User>()
 
     useEffect(() => {
@@ -52,7 +54,6 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
     async function sigInWithGoogle() {
         const provider = new firebase.auth.GoogleAuthProvider()
-
         const result = await auth.signInWithPopup(provider)
 
         if (result.user) {
@@ -72,12 +73,21 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
     function logout() {
         firebase.auth().signOut()
-
+        history.push('/')
     }
+
+    function isLoggedIn() {
+        if(!user){
+            return false
+        }
+        return true
+    }
+
+    
 
     return (
         <div>
-            <AuthContext.Provider value={{ user, sigInWithGoogle, logout }}>
+            <AuthContext.Provider value={{ user, sigInWithGoogle, logout, isLoggedIn}}>
                 {props.children}
             </AuthContext.Provider>
         </div >

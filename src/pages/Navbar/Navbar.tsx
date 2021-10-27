@@ -1,5 +1,5 @@
 import './Navbar.scss'
-import React from 'react'
+import React, { useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { Button } from '../../component/Button'
@@ -7,14 +7,30 @@ import { Button } from '../../component/Button'
 const Navbar = () => {
 
     const history = useHistory()
-    const { user, sigInWithGoogle } = useAuth()
+    const { user, sigInWithGoogle, isLoggedIn } = useAuth()
+    const [admin,setAdmin] = useState<boolean>(false)
     
-    async function isLogged() {
-        if (!user) {
+    async function isLoggedToReport() {
+        if (!isLoggedIn()) {
             await sigInWithGoogle()
         }
-        history.push('/extensions/new')
+        history.push('/extensions/report')
     }
+
+    function isAdmin() {
+        if(user === undefined) {
+            setAdmin(false)
+        }
+        else if(isLoggedIn()) {
+            if (user?.emaill === "kaoscatalogue@gmail.com") {
+                setAdmin(true)
+            }           
+        }
+    }
+
+    useEffect(() =>{
+        isAdmin()
+    },[user])
 
     return (
         <div className="template-navbar">
@@ -25,14 +41,14 @@ const Navbar = () => {
                 <Button onClick={() => { history.push('/constructs') }}>
                     Constructs
                 </Button>
-                <Button onClick={() => { history.push('/reportedextensions') }}>
+                {admin && <Button onClick={() => { history.push('/reportedextensions') }}>
                     Reported Extensions
-                </Button>
-                <Button onClick={isLogged}>
+                </Button>}
+                {admin && <Button onClick={() => {history.push('./extensions/new')}}>
                     Form Extensions
                 </Button>
-
-                <Button onClick={() => { history.push('/extensions/report')}}>
+                }
+                <Button onClick={isLoggedToReport}>
                     Form Report
                 </Button>
             </div>

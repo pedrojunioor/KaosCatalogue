@@ -1,7 +1,6 @@
 .content{
     display: flex;
     flex-direction: column;
-   
 }
 
 .Cards{
@@ -14,17 +13,76 @@
     border-radius: 8px;
     font-weight: 500;
     background: red;
-
-    height:40px;
-    width: 100px;
-
-    color: white;
+    color: #FFF;
+    color: #FFF;
+    padding: 0 32px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 20px;
-
     cursor: pointer;
     border: 0;
-    gap: 10px;
+    
 }
+
+.button-add-construct{
+    height: 50px;
+    border-radius: 8px;
+    font-weight: 500;
+    background: #009ACD;
+    color: #FFF;
+    padding: 0 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 0;
+    
+}
+
+.caption-constructs{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr!important;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+.constructs{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr!important;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-radius: 1px solid;
+}
+
+
+.admin-area{
+    display: flex;
+    justify-content:center;
+    gap: 50px;
+    }
+.modal{
+    display: flex;
+    justify-content:center;
+}
+
+.modal-style{
+    display: flex;
+    justify-content:center;
+    position: relative;
+    top: 10%;
+    left:10%;
+    border: 8px solid #000;
+    margin-right: -50%;
+    background: #FFF;
+    max-width:80%;
+    padding: 20px
+    }

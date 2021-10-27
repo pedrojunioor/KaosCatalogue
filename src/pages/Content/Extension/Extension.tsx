@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FormEvent } from 'react'
 import { useParams } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
@@ -6,6 +6,7 @@ import { Button } from '../../../component/Button'
 import { database } from '../../../services/firebase'
 import Card from '../Layout/Card'
 import FormConstruct from '../Constructs/FormConstruct'
+import Modal from 'react-modal';
 
 import './Extension.scss'
 
@@ -25,8 +26,11 @@ type Construct = {
     description: string,
     form: string,
     register: string,
-    type: string
+    type: string,
+    IdExtension: string
 }
+
+
 type FirebaseExtensions = Record<string, {
     applicationArea: string,
     author: string,
@@ -70,7 +74,7 @@ type extensionParams = {
 
 const Extension = () => {
 
-    const { user } = useAuth()
+    const { user, isLoggedIn } = useAuth()
     const history = useHistory()
     const params = useParams<extensionParams>();
     const extensionId = params.id;
@@ -78,13 +82,59 @@ const Extension = () => {
     const [constructs, setConstructs] = useState<Construct[]>([])
     const [extension, setExtension] = useState<Extension>()
     const [title, setTitle] = useState('')
+    const [admin, setAdmin] = useState<boolean>(false)
+    const [modalIsOpen, setIsOpen] = useState(false);
 
-    const [showForm, setShowForm] = useState<boolean>(false)
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
 
     function isAdmin() {
-        if (user?.emaill === "juniorsj33@gmail.com") {
-            setShowForm(true)
+        if (user === undefined) {
+            setAdmin(false)
         }
+        else if (isLoggedIn()) {
+            if (user?.emaill === "kaoscatalogue@gmail.com") {
+                setAdmin(true)
+            }
+        }
+    }
+
+    useEffect(() => {
+        isAdmin()
+    }, [user])
+
+    function getConstructs(constructs : Construct[]) {
+        return constructs.map((construct,i)=> {
+            return <div key={construct.id} className="constructs">
+                <span>{i+1}</span>
+                <span>{construct.area} </span>
+                <span>{construct.concept} </span>
+                <span>{construct.description}</span>
+                <span>{construct.form}</span>
+                <span>{construct.register}</span>
+                <span>{construct.type}</span>
+                <Button onClick={e => handleJoinConstruct(e,construct.id)}>Detalhes</Button>
+            </div>
+        })
+    }
+
+    async function handleJoinConstruct(event: FormEvent, idConstruct: string){
+        event.preventDefault();
+        if(idConstruct.trim() === '') {
+            return
+        }
+        const constructRef = await database.ref(`extensions/${extensionId}/constructs/${idConstruct}`).get()
+        if(!constructRef.exists()){
+            alert("Extension not found")
+            return;
+        }
+        history.push(`/extensions/${extensionId}/constructs/${idConstruct}`)
     }
 
     async function handleDeleteExtension() {
@@ -152,9 +202,7 @@ const Extension = () => {
                     setTitle(databaseExtension.title)
                     setConstructs(parsedExtension)
                 }
-
             }
-
         })
 
         return () => {
@@ -167,7 +215,6 @@ const Extension = () => {
         extensionRef.on('value', extension => {
             const databaseExtension = extension.val()
             if (databaseExtension !== null) {
-
                 const parsedExtension = {
                     applicationArea: databaseExtension.applicationArea,
                     author: databaseExtension.author,
@@ -198,19 +245,43 @@ const Extension = () => {
                     {showExtension(extension)}
                 </div>
             </Card>
-            <div>
-                <Button
-                    onClick={() => isAdmin()}>
-                    Add Construct
-                </Button>
-            </div>
-            <div >
-                <Button className="button-delete"
-                    onClick={() => handleDeleteExtension()}>
-                    Delete
-                </Button>
-            </div>
-            {showForm && <FormConstruct/>}
+            <Card titulo="Constructs">
+                <div className="caption-constructs">
+                        <span>-</span>
+                        <span>Area</span>
+                        <span>Concept</span>
+                        <span>Description</span>
+                        <span>Register</span>
+                        <span>Form</span>
+                        <span>type</span>
+                    </div>
+                    <div>
+                        { getConstructs(constructs)}
+                    </div>
+            </Card>
+            {admin &&
+                <div className="admin-area">
+                    <Button
+                        className="button-add-construct"
+                        onClick={openModal}>
+                        Add Construct
+                    </Button>
+                    <Button
+                        className="button-delete"
+                        onClick={() => handleDeleteExtension()}>
+                        Delete
+                    </Button>
+                </div>}
+            {admin && <div className="modal">
+                <Modal
+                    className="modal-style"
+                    isOpen={modalIsOpen}
+                    onRequestClose={closeModal}
+                    contentLabel="Example Modal">
+                    {/* <button onClick={closeModal}>close</button> */}
+                    <FormConstruct />
+                </Modal>
+            </div>}
         </div>
     )
 }

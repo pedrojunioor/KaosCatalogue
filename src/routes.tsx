@@ -15,7 +15,7 @@ const Routes = () => {
             <Route exact path="/extensions/new" component={FormExtension} />
             <Route exact path="/extension/:id" component={Extension} />
             <Route exact path="/extensions" component={Extensions} />
-            <Route exact path="/constructs" component={Constructs} />
+            <Route exact path="/extensions/:idExtension/constructs/:idConstruct" component={Constructs} />
             <Route exact path="/extensions/report" component={FormReport} />
             <Route exact path="/reportedextensions" component={ReportedExtension} />
         </Switch>

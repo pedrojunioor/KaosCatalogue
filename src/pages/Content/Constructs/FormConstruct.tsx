@@ -1,10 +1,8 @@
 import React,{useState, FormEvent} from 'react'
 import {useParams} from 'react-router-dom'
-
-import { useHistory } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
 import { Button } from '../../../component/Button'
-import {database, firebase} from '../../../services/firebase'
+import {database} from '../../../services/firebase'
 import './Constructs.scss'
 type extensionParams = {
     id: string
@@ -37,7 +35,7 @@ const FormConstruct = () => {
             type: typeState,
             form: formState,
             area: areaState,
-            
+            IdExtension: extensionId
         }
 
         await database.ref(`extensions/${extensionId}/constructs`).push(construct)

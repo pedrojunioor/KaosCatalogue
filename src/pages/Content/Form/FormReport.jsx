@@ -9,24 +9,27 @@ import './Form.scss';
 const FormReport = () => {
 
     const history = useHistory()
-    const { user } = useAuth()
+    const { user, sigInWithGoogle } = useAuth()
     const [ titleState, setTitleState ] = useState('');
 	const [ authorState, setAuthorState ] = useState('');
 	const [ linkState, setLinkState ] = useState('');
     
     async function handleCreateExtension(event: FormEvent) {
 		event.preventDefault();
-
 		const extensionRef = database.ref('reportedextensions');
-		console.log('REF', extensionRef);
-		const firebaseExtension = await extensionRef.push({
-			userName: user.emaill,
-			title: titleState,
-			author: authorState,
-			link: linkState
-		});
-
-		history.push(`/`);
+        if(user){
+            await extensionRef.push({
+                userName: user.emaill,
+                title: titleState,
+                author: authorState,
+                link: linkState
+            });
+            history.push(`/`);
+        }
+        else{
+            await sigInWithGoogle()
+        }
+		
 	}
 
     return (
