@@ -119,7 +119,7 @@ const Extension = () => {
                 <span>{construct.form}</span>
                 <span>{construct.register}</span>
                 <span>{construct.type}</span>
-                <Button onClick={e => handleJoinConstruct(e,construct.id)}>Detalhes</Button>
+                <Button onClick={e => handleJoinConstruct(e,construct.id)}>Detail</Button>
             </div>
         })
     }
@@ -245,7 +245,7 @@ const Extension = () => {
                     {showExtension(extension)}
                 </div>
             </Card>
-            <Card titulo="Constructs">
+            {constructs.length > 0 && <Card titulo="Constructs">
                 <div className="caption-constructs">
                         <span>-</span>
                         <span>Area</span>
@@ -258,7 +258,8 @@ const Extension = () => {
                     <div>
                         { getConstructs(constructs)}
                     </div>
-            </Card>
+            </Card>}
+            
             {admin &&
                 <div className="admin-area">
                     <Button

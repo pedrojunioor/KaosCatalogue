@@ -1,16 +1,40 @@
-.text-initial{
+.home{
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    justify-content: center;
     
-    >p{
-        text-align: start;
+}
+
+.text-initial{
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    gap: 110px 110px;
+
+    h1 {
+        font: 400 40px 'Roboto', sans-serif;
+       
+    }
+    h2 {
         font: 400 20px 'Roboto', sans-serif;
+        margin-bottom: 30px;
+    }
+    h4 {
+        font: 400 20px 'Roboto', sans-serif;
+        margin-bottom: 20px;
+    }
+    >p{
+        font: 400 20px 'Roboto', sans-serif;
+        margin-bottom: 20px;
+        text-align: justify!important;
     }
 
-    >ul{
+    ul{
         text-align: start;
         font: 400 16px 'Roboto', sans-serif;
+
+        li{
+            margin-left: 20px;
+        }
     }
    
 }

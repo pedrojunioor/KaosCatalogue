@@ -13,6 +13,7 @@ const FormReport = () => {
     const [ titleState, setTitleState ] = useState('');
 	const [ authorState, setAuthorState ] = useState('');
 	const [ linkState, setLinkState ] = useState('');
+    const [statusState,setStatusState] = useState('-');
     
     async function handleCreateExtension(event: FormEvent) {
 		event.preventDefault();
@@ -22,14 +23,15 @@ const FormReport = () => {
                 userName: user.emaill,
                 title: titleState,
                 author: authorState,
-                link: linkState
+                link: linkState,
+                status: statusState
+              
             });
             history.push(`/`);
         }
         else{
             await sigInWithGoogle()
         }
-		
 	}
 
     return (

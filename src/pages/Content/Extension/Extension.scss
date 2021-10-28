@@ -21,7 +21,6 @@
     align-items: center;
     cursor: pointer;
     border: 0;
-    
 }
 
 .button-add-construct{
@@ -36,23 +35,28 @@
     align-items: center;
     cursor: pointer;
     border: 0;
-    
 }
 
 .caption-constructs{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr!important;
+    grid-template-columns: 1fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr!important;
     align-items: center;
     justify-content: center;
     margin: 10px 10px 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+
+    >span{
+        font-weight: bold;
+        font-size: 22px;
+        margin-right: 10px;
+    }
     
 }
 
 .constructs{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr!important;
+    grid-template-columns: 1fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr!important;
     align-items: center;
     justify-content: center;
     margin: 10px 10px 10px;

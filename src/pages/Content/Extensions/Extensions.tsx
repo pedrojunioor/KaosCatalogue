@@ -72,7 +72,7 @@ const Extensions = () => {
                 <span>{extension.author} </span>
                 <span>{extension.datePublication}</span>
                 <span>{extension.source}</span>
-                <Button onClick={e => handleJoinExtension(e,extension.id)}>Detalhes</Button>
+                <Button onClick={e => handleJoinExtension(e,extension.id)}>Detail</Button>
             </div>
         })
     }
