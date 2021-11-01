@@ -21,7 +21,7 @@ function App() {
                     <Header />
                     <Navbar />
                     <Routes />
-                    <Footer />
+                    {/* <Footer /> */}
                 </AuthContextProvider>
                 </BrowserRouter>
            </Provider>         

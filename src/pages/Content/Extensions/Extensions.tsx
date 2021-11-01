@@ -205,7 +205,7 @@ const Extensions = () => {
             </form>
 
             <Card titulo="Extensions">
-                <div className="caption">
+                <div className="caption-extensions">
                     <span>-</span>
                     <span>Title</span>
                     <span>Author</span>

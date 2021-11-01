@@ -48,9 +48,9 @@
     }
 }
 
-.caption{
+.caption-extensions{
     display: grid;
-    grid-template-columns: 1fr 8fr 5fr 2fr 2fr 2fr!important;
+    grid-template-columns: 1fr 8fr 5fr 2fr 2fr 2fr;
     align-items: center;
     justify-content: center;
     padding-top: 10px;
@@ -65,7 +65,7 @@
 
 .extensions{
     display: grid;
-    grid-template-columns: 1fr 8fr 5fr 2fr 2fr 2fr!important;
+    grid-template-columns: 1fr 8fr 5fr 2fr 2fr 2fr;
     align-items: center;
     justify-content: center;
     padding-top: 10px;

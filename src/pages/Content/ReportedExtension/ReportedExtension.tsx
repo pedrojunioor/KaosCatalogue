@@ -71,7 +71,7 @@ const ReportedExtension = () => {
 
     function getExtensios(extensions : Extension[]) {
         return extensions.map((extension,i) => {
-            return <div key={extension.title} className="extensions">
+            return <div key={extension.title} className="extensions-reported">
                 <span>{i+1}</span>
                 <span>{extension.title} </span>
                 <span>{extension.author} </span>
@@ -82,7 +82,7 @@ const ReportedExtension = () => {
                     <Button 
                         className="button-approve"
                         onClick={()=> setIsOpen(true)}
-                        >Aprrove</Button>
+                        >Approve</Button>
                     <Button 
                         className="button-reject"
                         onClick={()=> handleDeleteExtension(extension.id)}
@@ -122,7 +122,7 @@ const ReportedExtension = () => {
     return (
         <div className="content">
             <Card titulo="Reported Extensions">
-                <div className="caption">
+                <div className="caption-extensions-reported">
                     <span>-</span>
                     <span>Title</span>
                     <span>Author</span>
