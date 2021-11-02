@@ -137,7 +137,6 @@ const ReportedExtension = () => {
             </Card>
             
             <Modal
-                
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 contentLabel="Example Modal">
