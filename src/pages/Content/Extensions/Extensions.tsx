@@ -205,8 +205,6 @@ const Extensions = () => {
 
     }
 
-    const placeholders = ['title', 'author', 'datePublication', 'applicationArea', 'source', 'toolsuport']
-
     function mountInput(place: string) {
         if (place === 'title') {
             return <div className="input-text">
@@ -298,7 +296,6 @@ const Extensions = () => {
                 <div>
                     <Button type="submit"> Search</Button>
                 </div>
-
             </form >
 
     <Card titulo="Extensions">

@@ -144,28 +144,72 @@ const Extension = () => {
         }
     }
 
-    // function showExtension(extension : Extension) {
-    //     if(extension !== undefined) {
-
-    //         return <div key={extension.title} className="extensions">
-    //             <span>{extension.title} </span>
-    //             <span>{extension.author} </span>
-    //             <span>{extension.datePublication}</span>
-    //             <span>{extension.source}</span>
-    //         </div>
-    //     }
-    //     else{
-    //         return <div>
-    //             AA
-    //         </div>
-    //     }
-    // }
 
     function showExtension(extension: Extension) {
 
         if (extension !== undefined) {
             return Object.keys(extension).map(item => {
                 if (extension[item] !== undefined) {
+                    if(item === 'applicationArea'){
+                        return <Card titulo="Application Area">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'author'){
+                        return <Card titulo="Author">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'datePublication'){
+                        return <Card titulo="Year Publication">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'extensionDerivative'){
+                        return <Card titulo="Extension Derivative">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'extensionBase'){
+                        return <Card titulo="Extension Base">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'source'){
+                        return <Card titulo="Source">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'sourceLocation'){
+                        return <Card titulo="Source Location">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'validationForm'){
+                        return <Card titulo="Validation Form">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'metamodelcompleteness'){
+                        return <Card titulo="Metamodel Completeness">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'syntaxlevel'){
+                        return <Card titulo="Syntax level">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'toolsuport'){
+                        return <Card titulo="Tool Suport">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
+                    if(item === 'definitionofconcepts'){
+                        return <Card titulo="Definition of Concepts">
+                            <span>{extension[item]}</span>
+                        </Card>
+                    }
                     return <Card titulo={item}>
                         <span>{extension[item]}</span>
                     </Card>
@@ -251,9 +295,9 @@ const Extension = () => {
                         <span>Area</span>
                         <span>Concept</span>
                         <span>Description</span>
-                        <span>Register</span>
                         <span>Form</span>
-                        <span>type</span>
+                        <span>Register</span>
+                        <span>Type</span>
                     </div>
                     <div>
                         { getConstructs(constructs)}

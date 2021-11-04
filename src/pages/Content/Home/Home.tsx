@@ -1,7 +1,6 @@
 import React from 'react'
 import '../template-content.scss'
 import './Home.scss'
-import Card from '../Layout/Card'
 
 // import { useAuth } from '../../../hooks/useAuth'
 
