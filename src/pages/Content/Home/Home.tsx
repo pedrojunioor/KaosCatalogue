@@ -29,9 +29,8 @@ const Home = () => {
                         with suggestion of papers.
                     </p>
                     <p>
-                        In this catalogue is possible to list the indexed extensions (an optional representation in form of a tree is available), 
-                        list its constructs and perform search by author, title and application area. It is also possible to suggest papers to be 
-                        introduced in catalogue.
+                        In this catalogue is possible to list the indexed extensions, list its constructs and perform search by author, 
+                        title and application area. It is also possible to suggest papers to be introduced in catalogue.
                     </p>
                     <div>
                    

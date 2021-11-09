@@ -1,8 +1,10 @@
-import React,{useState, FormEvent} from 'react'
-import {useParams} from 'react-router-dom'
+import React, { useState, FormEvent } from 'react'
+import { useParams } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
 import { Button } from '../../../component/Button'
-import {database} from '../../../services/firebase'
+import { database } from '../../../services/firebase'
+
+
 import './Constructs.scss'
 type extensionParams = {
     id: string
@@ -19,12 +21,11 @@ const FormConstruct = () => {
     const [typeState, setTypeState] = useState('')
     const [formState, setFormState] = useState('')
     const [applicationAreaState, setApplicationAreaState] = useState('')
-      // const [classificationState, setClassificationState] = useState('')
-
-    async function handleSendConstruct(event: FormEvent){
+    
+    async function handleSendConstruct(event: FormEvent) {
         event.preventDefault()
 
-        if(!user){
+        if (!user) {
             return
         }
 
@@ -35,10 +36,12 @@ const FormConstruct = () => {
             type: typeState,
             form: formState,
             area: applicationAreaState,
-            IdExtension: extensionId
+            IdExtension: extensionId,
+            // image: ""
         }
 
         await database.ref(`extensions/${extensionId}/constructs`).push(construct)
+        
         setConceptState('')
         setDescriptionState('')
         setTypeState('')
@@ -49,7 +52,7 @@ const FormConstruct = () => {
     return (
         <div className="content">
             <div>
-            <div className="form-input">
+                <div className="form-input">
                     <form onSubmit={handleSendConstruct}>
                         <label>Concept</label>
                         <input
@@ -86,6 +89,8 @@ const FormConstruct = () => {
                             onChange={event => setApplicationAreaState(event.target.value)}
                             value={applicationAreaState}
                         />
+                        
+                     
                         {/* <div className="input-select">
                             <label>Form</label>
                             <select value={formState} onChange={event =>setFormState(event.target.value)}>
@@ -99,8 +104,8 @@ const FormConstruct = () => {
                         <Button type="submit">
                             Cadastrar Extensão
                         </Button>
-                        </form>
-                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     )

@@ -1,14 +1,35 @@
-table, th, td {
-    border: 1px solid black;
-    padding:10px;
-  }
-
-td{
-    display:flex;
+table,
+th,
+td {
+	border: 1px solid black;
+	padding: 10px;
 }
 
-.div-info{
-    position: relative;
-    width: 400px;
-    height: 200px;    
+td {
+	display: flex;
+}
+
+.div-info {
+	position: relative;
+	width: 400px;
+	height: 200px;
+}
+
+.image-area {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+    gap: 10px;
+
+	> div {
+		display: flex;
+		align-items: center;
+        gap: 10px;
+		flex-direction: column;
+	}
+}
+
+.img-construct {
+	max-width: 20rem;
+	max-height: 20rem;
 }

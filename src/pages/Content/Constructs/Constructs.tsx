@@ -46,6 +46,7 @@ const Constructs = () => {
 
     const [constructs, setConstructs] = useState<Construct[]>([])
 
+
     async function handleJoinConstruct(event: FormEvent, IdExtension: string, IdConstruct: string) {
         event.preventDefault();
         if (IdExtension.trim() === '') {
@@ -65,9 +66,6 @@ const Constructs = () => {
     function getConstructs(constructs: Construct[]) {
         return constructs.map((construct, i) => {
             if (construct !== undefined) {
-                console.log('INTEIRO',construct)
-                console.log('EXT', construct.id)
-                console.log('CONS', construct.IdExtension)
                 return <div key={construct.id} className="constructs">
                     <span>{i + 1}</span>
                     <span>{construct.area} </span>
@@ -86,25 +84,40 @@ const Constructs = () => {
         const extensionRef = database.ref(`extensions`);
         extensionRef.on('value', extension => {
             const databaseExtension = extension.val()
-            const parsed = Object.entries(databaseExtension).map(([key, value]) => {
+            let construtores : any = []
+            Object.entries(databaseExtension).forEach(([key, value]) => {
                 if (value.constructs) {
-                    let chave = Object.entries(value.constructs).map(([key,value]) => {
-                        return key
+                    // console.log('constructs',value.constructs)
+                    Object.entries(value.constructs).forEach(([key, value]) => {
+                        console.log('key',key)
                     })
-                    return {
-                        id: chave[0],
-                        area: Object.values(value.constructs)[0]['area'],
-                        concept: Object.values(value.constructs)[0]['concept'],
-                        description: Object.values(value.constructs)[0]['description'],
-                        form: Object.values(value.constructs)[0]['form'],
-                        register: Object.values(value.constructs)[0]['register'],
-                        type: Object.values(value.constructs)[0]['type'],
-                        IdExtension: Object.values(value.constructs)[0]['IdExtension']
-                    }
-                   
+             
+
+                    Object.entries(value.constructs).forEach(([key,value]) =>{
+                        console.log('key',key)
+                        console.log('value',value)
+                        construtores = [
+                            ...construtores,
+                            {key: key, value: value}
+                        ]
+                    })
                 }
             })
-
+           
+         
+            const parsed = Object.entries(construtores).map(([key, value]) =>{
+                
+                return {
+                    id: value.key,
+                    area: value.value.area,
+                    concept: value.value.concept,
+                    description: value.value.description,
+                    form: value.value.form,
+                    register: value.value.register,
+                    type: value.value.type,
+                    IdExtension: value.value.IdExtension
+                }
+            })
             setConstructs(parsed)
         })
 
@@ -112,6 +125,37 @@ const Constructs = () => {
             extensionRef.off('value')
         }
     }, [extensionId]);
+    // useEffect(() => {
+    //     const extensionRef = database.ref(`extensions`);
+    //     extensionRef.on('value', extension => {
+    //         const databaseExtension = extension.val()
+    //         const parsed = Object.entries(databaseExtension).map(([key, value]) => {
+    //             if (value.constructs) {
+    //                 console.log('CONSTRUTORES',Object.keys(value.constructs).length)
+    //                 let chave = Object.entries(value.constructs).map(([key, value]) => {
+    //                     return key
+    //                 })
+    //                 for (let i = 0; i < Object.keys(value.constructs).length; i++) {
+    //                     return {
+                            // id: chave[i],
+                            // area: Object.values(value.constructs)[i]['area'],
+                            // concept: Object.values(value.constructs)[i]['concept'],
+                            // description: Object.values(value.constructs)[i]['description'],
+                            // form: Object.values(value.constructs)[i]['form'],
+                            // register: Object.values(value.constructs)[i]['register'],
+                            // type: Object.values(value.constructs)[i]['type'],
+                            // IdExtension: Object.values(value.constructs)[i]['IdExtension']
+    //                     }
+    //                 }
+    //             }
+    //         })
+    //         setConstructs(parsed)
+    //     })
+
+    //     return () => {
+    //         extensionRef.off('value')
+    //     }
+    // }, [extensionId]);
 
     return (
         <Card titulo="Constructs">
