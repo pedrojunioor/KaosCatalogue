@@ -1,36 +1,44 @@
 // import '../template-content.scss'
 import React, { useState, FormEvent } from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
 import { Button } from '../../../component/Button';
 import { database } from '../../../services/firebase';
 import './Form.scss';
 
-const FormExtension = () => {
-	const history = useHistory();
-	const { user} = useAuth();
+type Iprops = {
+    data: any,
+    idExtension: string
+}
 
-	const [ titleState, setTitleState ] = useState('');
-	const [ authorState, setAuthorState ] = useState('');
-	const [ datePublicationState, setDatePublicationState ] = useState('');
-	const [ sourceState, setSourceState ] = useState('others');
-	const [ validationFormState, setValidationFormState ] = useState('case-study');
-	const [ applicationAreaState, setApplicationAreaState ] = useState('');
-	const [ metamodelCompletenessState, setMetamodelCompletenessState ] = useState('');
-	const [ sourceLocationState, setSourceLocationState ] = useState('');
-	const [ extensionDerivativeState, setExtensionDerivativeState ] = useState('not');
-	const [ extensionBaseState, setExtensionBaseState ] = useState('');
-	const [ definitionofConceptsState, setDefinitionofConceptsState ] = useState('Definition is Presented');
-	const [ syntaxLevelState, setSyntaxLevelState ] = useState('');
-	const [ toolSupportState, setToolSupportState ] = useState('not');
+const FormExtensionEdit = Iprops => { 
 
-	async function handleCreateExtension(event: FormEvent) {
-		event.preventDefault();
+    const extensionEdit = Iprops.data;
+    const extensionId = Iprops.idExtension;
+	const { user } = useAuth()
+    const history = useHistory()
+ 
+	const [ titleState, setTitleState ] = useState(extensionEdit.title);
+	const [ authorState, setAuthorState ] = useState(extensionEdit.author);
+	const [ datePublicationState, setDatePublicationState ] = useState(extensionEdit.datePublication);
+	const [ sourceState, setSourceState ] = useState(extensionEdit.source);
+	const [ validationFormState, setValidationFormState ] = useState(extensionEdit.validationForm);
+	const [ applicationAreaState, setApplicationAreaState ] = useState(extensionEdit.applicationArea);
+	const [ metamodelCompletenessState, setMetamodelCompletenessState ] = useState(extensionEdit.metamodelcompleteness);
+	const [ sourceLocationState, setSourceLocationState ] = useState(extensionEdit.sourceLocation);
+	const [ extensionDerivativeState, setExtensionDerivativeState ] = useState(extensionEdit.extensionDerivative);
+	const [ extensionBaseState, setExtensionBaseState ] = useState(extensionEdit.extensionBase);
+	const [ definitionofConceptsState, setDefinitionofConceptsState ] = useState(extensionEdit.definitionofconcepts);
+	const [ syntaxLevelState, setSyntaxLevelState ] = useState(extensionEdit.syntaxlevel);
+	const [ toolSupportState, setToolSupportState ] = useState(extensionEdit.toolsuport);
 
-		const extensionRef = database.ref('extensions');
-		console.log('REF', extensionRef);
-		const firebaseExtension = await extensionRef.push({
+	async function handleEditExtension(event: FormEvent) {
+		// event.preventDefault();
+
+		const extensionRef = database.ref(`extensions/${extensionId}`);
+		
+		const firebaseExtension = await extensionRef.update({
 			userId: user.id,
 			title: titleState,
 			author: authorState,
@@ -47,14 +55,16 @@ const FormExtension = () => {
 			definitionofconcepts: definitionofConceptsState
 		});
 
-		history.push(`/extension/${firebaseExtension.key}`);
+		history.push(`/extension/${extensionId}`);
+
+
 	}
 
 	return (
 		<div className="root">
 			<div className="main">
 				<div className="form-input">
-					<form onSubmit={handleCreateExtension}>
+					<form onSubmit={handleEditExtension}>
 						<label>Titulo</label>
 						<input
 							type="text"
@@ -201,7 +211,7 @@ const FormExtension = () => {
 							</div>
 						)}
 						<div className="button-submit">
-							<Button type="submit">Confirm</Button>
+							<Button type="submit">Update</Button>
 						</div>
 					</form>
 				</div>
@@ -210,4 +220,4 @@ const FormExtension = () => {
 	);
 };
 
-export default FormExtension;
+export default FormExtensionEdit;

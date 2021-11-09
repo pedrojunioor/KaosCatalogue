@@ -80,14 +80,6 @@ const Construct = () => {
         }
     }
 
-    // async function handleSendConstruct(event: FormEvent) {
-    //     event.preventDefault()
-
-    //     await database.ref(`extensions/${extensionId}/constructs`).update(
-    //         {image: url}
-    //     )
-
-    // }
 
     function isAdmin() {
         if (user === undefined) {

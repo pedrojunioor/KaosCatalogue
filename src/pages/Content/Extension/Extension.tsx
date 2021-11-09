@@ -6,6 +6,7 @@ import { Button } from '../../../component/Button'
 import { database } from '../../../services/firebase'
 import Card from '../Layout/Card'
 import FormConstruct from '../Constructs/FormConstruct'
+import FormExtensionEdit from '../Form/FormExtensionEdit'
 import Modal from 'react-modal';
 
 import './Extension.scss'
@@ -78,12 +79,14 @@ const Extension = () => {
     const history = useHistory()
     const params = useParams<extensionParams>();
     const extensionId = params.id;
+    console.log(extensionId)
 
     const [constructs, setConstructs] = useState<Construct[]>([])
     const [extension, setExtension] = useState<Extension>()
     const [title, setTitle] = useState('')
     const [admin, setAdmin] = useState<boolean>(false)
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [modalEditIsOpen, setEditIsOpen] = useState(false);
 
     function openModal() {
         setIsOpen(true);
@@ -92,7 +95,13 @@ const Extension = () => {
     function closeModal() {
         setIsOpen(false);
     }
+    function openModalEdit() {
+        setEditIsOpen(true);
+    }
 
+    function closeModalEdit() {
+        setEditIsOpen(false);
+    }
 
     function isAdmin() {
         if (user === undefined) {
@@ -109,28 +118,28 @@ const Extension = () => {
         isAdmin()
     }, [user])
 
-    function getConstructs(constructs : Construct[]) {
-        return constructs.map((construct,i)=> {
+    function getConstructs(constructs: Construct[]) {
+        return constructs.map((construct, i) => {
             return <div key={construct.id} className="constructs">
-                <span>{i+1}</span>
+                <span>{i + 1}</span>
                 <span>{construct.area} </span>
                 <span>{construct.concept} </span>
                 <span>{construct.description}</span>
                 <span>{construct.form}</span>
                 <span>{construct.register}</span>
                 <span>{construct.type}</span>
-                <Button onClick={e => handleJoinConstruct(e,construct.id)}>Detail</Button>
+                <Button onClick={e => handleJoinConstruct(e, construct.id)}>Detail</Button>
             </div>
         })
     }
 
-    async function handleJoinConstruct(event: FormEvent, idConstruct: string){
+    async function handleJoinConstruct(event: FormEvent, idConstruct: string) {
         event.preventDefault();
-        if(idConstruct.trim() === '') {
+        if (idConstruct.trim() === '') {
             return
         }
         const constructRef = await database.ref(`extensions/${extensionId}/constructs/${idConstruct}`).get()
-        if(!constructRef.exists()){
+        if (!constructRef.exists()) {
             alert("Extension not found")
             return;
         }
@@ -144,68 +153,70 @@ const Extension = () => {
         }
     }
 
-
     function showExtension(extension: Extension) {
 
         if (extension !== undefined) {
             return Object.keys(extension).map(item => {
                 if (extension[item] !== undefined) {
-                    if(item === 'applicationArea'){
+                    if (item === 'title') {
+                        return 
+                    }
+                    if (item === 'applicationArea') {
                         return <Card titulo="Application Area">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'author'){
+                    if (item === 'author') {
                         return <Card titulo="Author">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'datePublication'){
+                    if (item === 'datePublication') {
                         return <Card titulo="Year Publication">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'extensionDerivative'){
+                    if (item === 'extensionDerivative') {
                         return <Card titulo="Extension Derivative">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'extensionBase'){
+                    if (item === 'extensionBase') {
                         return <Card titulo="Extension Base">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'source'){
+                    if (item === 'source') {
                         return <Card titulo="Source">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'sourceLocation'){
+                    if (item === 'sourceLocation') {
                         return <Card titulo="Source Location">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'validationForm'){
+                    if (item === 'validationForm') {
                         return <Card titulo="Validation Form">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'metamodelcompleteness'){
+                    if (item === 'metamodelcompleteness') {
                         return <Card titulo="Metamodel Completeness">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'syntaxlevel'){
+                    if (item === 'syntaxlevel') {
                         return <Card titulo="Syntax level">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'toolsuport'){
+                    if (item === 'toolsuport') {
                         return <Card titulo="Tool Suport">
                             <span>{extension[item]}</span>
                         </Card>
                     }
-                    if(item === 'definitionofconcepts'){
+                    if (item === 'definitionofconcepts') {
                         return <Card titulo="Definition of Concepts">
                             <span>{extension[item]}</span>
                         </Card>
@@ -258,8 +269,11 @@ const Extension = () => {
         const extensionRef = database.ref(`extensions/${extensionId}`);
         extensionRef.on('value', extension => {
             const databaseExtension = extension.val()
+           
             if (databaseExtension !== null) {
+                console.log(databaseExtension)
                 const parsedExtension = {
+                    title: databaseExtension.title,
                     applicationArea: databaseExtension.applicationArea,
                     author: databaseExtension.author,
                     datePublication: databaseExtension.datePublication,
@@ -291,19 +305,19 @@ const Extension = () => {
             </Card>
             {constructs.length > 0 && <Card titulo="Constructs">
                 <div className="caption-constructs">
-                        <span>-</span>
-                        <span>Area</span>
-                        <span>Concept</span>
-                        <span>Description</span>
-                        <span>Form</span>
-                        <span>Register</span>
-                        <span>Type</span>
-                    </div>
-                    <div>
-                        { getConstructs(constructs)}
-                    </div>
+                    <span>-</span>
+                    <span>Area</span>
+                    <span>Concept</span>
+                    <span>Description</span>
+                    <span>Form</span>
+                    <span>Register</span>
+                    <span>Type</span>
+                </div>
+                <div>
+                    {getConstructs(constructs)}
+                </div>
             </Card>}
-            
+
             {admin &&
                 <div className="admin-area">
                     <Button
@@ -316,7 +330,23 @@ const Extension = () => {
                         onClick={() => handleDeleteExtension()}>
                         Delete
                     </Button>
+                    <Button
+                        className="button-add-construct"
+                        onClick={openModalEdit}>
+                        Edit
+                    </Button>
                 </div>}
+            
+                {admin && <div className="modal">
+            <Modal
+                isOpen={modalEditIsOpen}
+                onRequestClose={closeModalEdit}
+                contentLabel="Example Modal">
+                <Button onClick={closeModalEdit}>X</Button>
+                <FormExtensionEdit data={extension} idExtension={extensionId} />
+            </Modal>
+            </div>}
+
             {admin && <div className="modal">
                 <Modal
                     className="modal-style"
@@ -327,6 +357,8 @@ const Extension = () => {
                     <FormConstruct />
                 </Modal>
             </div>}
+
+
         </div>
     )
 }
