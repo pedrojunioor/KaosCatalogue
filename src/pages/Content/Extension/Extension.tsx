@@ -66,7 +66,8 @@ type Extension = {
     metamodelcompleteness: string,
     syntaxlevel: string,
     toolsuport: string,
-    definitionofconcepts: string
+    definitionofconcepts: string,
+    link: string
 }
 
 type extensionParams = {
@@ -159,7 +160,7 @@ const Extension = () => {
             return Object.keys(extension).map(item => {
                 if (extension[item] !== undefined) {
                     if (item === 'title') {
-                        return 
+                        return
                     }
                     if (item === 'applicationArea') {
                         return <Card titulo="Application Area">
@@ -221,6 +222,15 @@ const Extension = () => {
                             <span>{extension[item]}</span>
                         </Card>
                     }
+                    if (item === 'link') {
+                        return <Card titulo="Link">
+                            <a href={`${extension[item]}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg"  className="h-6 w-6" fill="none" width={'32px'} height={'32px'} stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                        </Card>
+                    }
                     return <Card titulo={item}>
                         <span>{extension[item]}</span>
                     </Card>
@@ -269,7 +279,7 @@ const Extension = () => {
         const extensionRef = database.ref(`extensions/${extensionId}`);
         extensionRef.on('value', extension => {
             const databaseExtension = extension.val()
-           
+
             if (databaseExtension !== null) {
                 console.log(databaseExtension)
                 const parsedExtension = {
@@ -285,7 +295,8 @@ const Extension = () => {
                     metamodelcompleteness: databaseExtension.metamodelcompleteness,
                     syntaxlevel: databaseExtension.syntaxlevel,
                     toolsuport: databaseExtension.toolsuport,
-                    definitionofconcepts: databaseExtension.definitionofconcepts
+                    definitionofconcepts: databaseExtension.definitionofconcepts,
+                    link: databaseExtension.link
                 }
                 setExtension(parsedExtension)
 
@@ -336,15 +347,15 @@ const Extension = () => {
                         Edit
                     </Button>
                 </div>}
-            
-                {admin && <div className="modal">
-            <Modal
-                isOpen={modalEditIsOpen}
-                onRequestClose={closeModalEdit}
-                contentLabel="Example Modal">
-                <Button onClick={closeModalEdit}>X</Button>
-                <FormExtensionEdit data={extension} idExtension={extensionId} />
-            </Modal>
+
+            {admin && <div className="modal">
+                <Modal
+                    isOpen={modalEditIsOpen}
+                    onRequestClose={closeModalEdit}
+                    contentLabel="Example Modal">
+                    <Button onClick={closeModalEdit}>X</Button>
+                    <FormExtensionEdit data={extension} idExtension={extensionId} />
+                </Modal>
             </div>}
 
             {admin && <div className="modal">

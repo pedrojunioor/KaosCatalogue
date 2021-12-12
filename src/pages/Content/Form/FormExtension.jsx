@@ -15,6 +15,7 @@ const FormExtension = () => {
 	const [ authorState, setAuthorState ] = useState('');
 	const [ datePublicationState, setDatePublicationState ] = useState('');
 	const [ sourceState, setSourceState ] = useState('others');
+	const [ linkState, setLinkState ] = useState('');
 	const [ validationFormState, setValidationFormState ] = useState('case-study');
 	const [ applicationAreaState, setApplicationAreaState ] = useState('');
 	const [ metamodelCompletenessState, setMetamodelCompletenessState ] = useState('');
@@ -44,7 +45,8 @@ const FormExtension = () => {
 			metamodelcompleteness: metamodelCompletenessState,
 			syntaxlevel: syntaxLevelState,
 			toolsuport: toolSupportState,
-			definitionofconcepts: definitionofConceptsState
+			definitionofconcepts: definitionofConceptsState,
+			link: linkState,
 		});
 
 		history.push(`/extension/${firebaseExtension.key}`);
@@ -76,6 +78,13 @@ const FormExtension = () => {
 							onChange={(event) => setDatePublicationState(event.target.value)}
 							value={datePublicationState}
 						/>
+						<label>Link</label>
+						<input
+							type="text"
+							placeholder="Link"
+							onChange={(event) => setLinkState(event.target.value)}
+							value={linkState}
+						/>
 
 						<label>Source Location</label>
 						<input
@@ -104,6 +113,8 @@ const FormExtension = () => {
 									<option value="experiment">Experiment</option>
 									<option value="example-of-use">Example of use</option>
 									<option value="quiz">Quiz</option>
+									<option value="Qualitative Analysis">Qualitative Analysis</option>
+                                    <option value="Survey">Survey</option>
 									<option value="not-presentede-valuation">Not presented evaluation</option>
 								</select>
 							</div>
@@ -165,6 +176,7 @@ const FormExtension = () => {
 								>
 									<option value="Definition is Presented">Definition is Presented</option>
 									<option value="Partially Presented">Partially Presented</option>
+									<option value="Not Presented">Not Presented</option>
 								</select>
 							</div>
 

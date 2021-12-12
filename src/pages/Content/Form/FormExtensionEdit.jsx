@@ -22,6 +22,7 @@ const FormExtensionEdit = Iprops => {
 	const [ titleState, setTitleState ] = useState(extensionEdit.title);
 	const [ authorState, setAuthorState ] = useState(extensionEdit.author);
 	const [ datePublicationState, setDatePublicationState ] = useState(extensionEdit.datePublication);
+    const [ linkState, setLinkState ] = useState(extensionEdit.link);
 	const [ sourceState, setSourceState ] = useState(extensionEdit.source);
 	const [ validationFormState, setValidationFormState ] = useState(extensionEdit.validationForm);
 	const [ applicationAreaState, setApplicationAreaState ] = useState(extensionEdit.applicationArea);
@@ -52,7 +53,8 @@ const FormExtensionEdit = Iprops => {
 			metamodelcompleteness: metamodelCompletenessState,
 			syntaxlevel: syntaxLevelState,
 			toolsuport: toolSupportState,
-			definitionofconcepts: definitionofConceptsState
+			definitionofconcepts: definitionofConceptsState,
+            link: linkState
 		});
 
 		history.push(`/extension/${extensionId}`);
@@ -86,6 +88,13 @@ const FormExtensionEdit = Iprops => {
 							onChange={(event) => setDatePublicationState(event.target.value)}
 							value={datePublicationState}
 						/>
+                        <label>Link</label>
+						<input
+							type="text"
+							placeholder="Link"
+							onChange={(event) => setLinkState(event.target.value)}
+							value={linkState}
+						/>
 
 						<label>Source Location</label>
 						<input
@@ -114,6 +123,8 @@ const FormExtensionEdit = Iprops => {
 									<option value="experiment">Experiment</option>
 									<option value="example-of-use">Example of use</option>
 									<option value="quiz">Quiz</option>
+                                    <option value="Qualitative Analysis">Qualitative Analysis</option>
+                                    <option value="Survey">Survey</option>
 									<option value="not-presentede-valuation">Not presented evaluation</option>
 								</select>
 							</div>
@@ -175,6 +186,7 @@ const FormExtensionEdit = Iprops => {
 								>
 									<option value="Definition is Presented">Definition is Presented</option>
 									<option value="Partially Presented">Partially Presented</option>
+                                    <option value="Not Presented">Not Presented</option>
 								</select>
 							</div>
 
