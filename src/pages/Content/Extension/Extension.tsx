@@ -123,12 +123,10 @@ const Extension = () => {
         return constructs.map((construct, i) => {
             return <div key={construct.id} className="constructs">
                 <span>{i + 1}</span>
-                <span>{construct.area} </span>
-                <span>{construct.concept} </span>
-                <span>{construct.description}</span>
-                <span>{construct.form}</span>
+                <span>{construct.name} </span>
+                <span>{construct.meaning} </span>
+                <span>{construct.conect}</span>
                 <span>{construct.register}</span>
-                <span>{construct.type}</span>
                 <Button onClick={e => handleJoinConstruct(e, construct.id)}>Detail</Button>
             </div>
         })
@@ -255,12 +253,10 @@ const Extension = () => {
                     const parsedExtension = Object.entries(firebaseConstructs).map(([key, value]) => {
                         return {
                             id: key,
-                            area: value.area,
-                            concept: value.concept,
-                            description: value.description,
-                            form: value.form,
-                            register: value.register,
-                            type: value.type
+                            name: value.name,
+                            meaning: value.meaning,
+                            conect: value.conect,
+                            register: value.register
 
                         }
                     })
@@ -317,12 +313,11 @@ const Extension = () => {
             {constructs.length > 0 && <Card titulo="Constructs">
                 <div className="caption-constructs">
                     <span>-</span>
-                    <span>Area</span>
-                    <span>Concept</span>
-                    <span>Description</span>
-                    <span>Form</span>
+                    <span>Name</span>
+                    <span>Meaning</span>
+                    <span>Conect</span>
                     <span>Register</span>
-                    <span>Type</span>
+
                 </div>
                 <div>
                     {getConstructs(constructs)}

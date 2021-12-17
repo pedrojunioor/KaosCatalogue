@@ -205,16 +205,19 @@ const Extensions = () => {
 
     }
 
+
+
     function mountInput(place: string) {
+
         if (place === 'title') {
             return <div className="input-text">
                 <input
                     type="text"
                     placeholder="Enter the Title"
                     onChange={event => { setParseState(event.target.value) }}
-                    value={parseState}
+                    value={parseState.toString()}
                 />
-            </div> 
+            </div>
         }
         if (place === 'author') {
             return <div className="input-text">
@@ -222,19 +225,33 @@ const Extensions = () => {
                     type="text"
                     placeholder="Enter the Author"
                     onChange={event => { setParseState(event.target.value) }}
-                    value={parseState}
+                    value={parseState.toString()}
                 />
-            </div> 
+            </div>
         }
-        if (place === 'applicationarea') {
+        if (place === 'applicationArea') {
             return <div className="input-text">
                 <input
                     type="text"
+                    list="areas"
                     placeholder="Enter the Application Area"
                     onChange={event => { setParseState(event.target.value) }}
-                    value={parseState}
+                    value={parseState.toString()}
                 />
-            </div> 
+                 <datalist id="areas">
+                        <option value="Adaptive Systems"/>
+                        <option value="Web Services"/>
+                        <option value="Aspects"/>
+                        <option value="Risks"/>
+                        <option value="Safety"/>
+                        <option value="Autonomic Systems"/>
+                        <option value="Organizational/Business Process"/>
+                        <option value="Security/Privacy/Vulnerability"/>
+                        <option value="Business continuity"/>
+                        <option value="Ambient Systems"/>
+                        <option value="Others"/>
+                </datalist>
+            </div>
         }
         if (place === 'datePublication') {
             return <div className="input-text">
@@ -242,9 +259,9 @@ const Extensions = () => {
                     type="text"
                     placeholder="Enter Year of Publication"
                     onChange={event => { setParseState(event.target.value) }}
-                    value={parseState}
+                    value={parseState.toString()}
                 />
-            </div> 
+            </div>
         }
         if (place === 'source') {
             return <div className="input-text">
@@ -252,9 +269,9 @@ const Extensions = () => {
                     type="text"
                     placeholder="Enter the Source"
                     onChange={event => { setParseState(event.target.value) }}
-                    value={parseState}
+                    value={parseState.toString()}
                 />
-            </div> 
+            </div>
         }
         if (place === 'toolsuport') {
             return <div className="input-text">
@@ -262,20 +279,19 @@ const Extensions = () => {
                     type="text"
                     placeholder="Enter YES or NOT"
                     onChange={event => { setParseState(event.target.value) }}
-                    value={parseState}
+                    value={parseState.toString()}
                 />
-            </div> 
+            </div>
         }
-        else{
+        else {
             return <div className="input-text">
                 <input
                     type="text"
                     placeholder="---------"
                     onChange={event => { setParseState(event.target.value) }}
-                    value={parseState}
+                    value={parseState.toString()}
                 />
-            </div> 
-
+            </div>
         }
     }
 
@@ -287,29 +303,33 @@ const Extensions = () => {
                         <option value="title">Title</option>
                         <option value="author">Author</option>
                         <option value="datePublication">Year</option>
-                        <option value="applicationarea">ApplicationArea</option>
+                        <option value="applicationArea">Application Area</option>
                         <option value="source">Source</option>
                         <option value="toolsuport">Tool Support</option>
                     </select>
                 </div>
-                {mountInput(filterState)}                
+    
+                {mountInput(filterState)}
                 <div>
                     <Button type="submit"> Search</Button>
                 </div>
             </form >
 
-    <Card titulo="Extensions">
-        <div className="caption-extensions">
-            <span>-</span>
-            <span>Title</span>
-            <span>Author</span>
-            <span>Date</span>
-            <span>Source</span>
-        </div>
-        <div>
-            {getExtensions(extensions)}
-        </div>
-    </Card>
+            <Card titulo="Extensions">
+                <div className="caption-extensions">
+                    <span>-</span>
+                    <span>Title</span>
+                    <span>Author</span>
+                    <span>Date</span>
+                    <span>Source</span>
+                </div>
+                <div>
+                    {getExtensions(extensions)}
+                </div>
+            </Card>
+            <div>
+                
+            </div>
         </div >
     )
 }

@@ -16,12 +16,12 @@ const FormConstruct = () => {
     const params = useParams<extensionParams>();
     const extensionId = params.id;
 
-    const [conceptState, setConceptState] = useState('')
-    const [descriptionState, setDescriptionState] = useState('')
-    const [typeState, setTypeState] = useState('')
+    const [nameState, setNameState] = useState('')
+    const [meaningState, setMeaningState] = useState('')
+    const [conectState, setConectState] = useState('-')
     const [formState, setFormState] = useState('')
     const [applicationAreaState, setApplicationAreaState] = useState('')
-    
+
     async function handleSendConstruct(event: FormEvent) {
         event.preventDefault()
 
@@ -31,22 +31,21 @@ const FormConstruct = () => {
 
         const construct = {
             register: user.user?.emaill,
-            concept: conceptState,
-            description: descriptionState,
-            type: typeState,
-            form: formState,
-            area: applicationAreaState,
+            name: nameState,
+            meaning: meaningState,
+            // area: applicationAreaState,
+            conect: conectState,
             IdExtension: extensionId,
-            // image: ""
+            image: ""
+
         }
 
         await database.ref(`extensions/${extensionId}/constructs`).push(construct)
-        
-        setConceptState('')
-        setDescriptionState('')
-        setTypeState('')
-        setApplicationAreaState('')
-        setFormState('')
+
+        setNameState('')
+        setMeaningState('')
+        setConectState('')
+
     }
 
     return (
@@ -54,55 +53,43 @@ const FormConstruct = () => {
             <div>
                 <div className="form-input">
                     <form onSubmit={handleSendConstruct}>
-                        <label>Concept</label>
+                        <label>Construct Name</label>
                         <input
                             type="text"
                             placeholder="Concept"
-                            onChange={event => setConceptState(event.target.value)}
-                            value={conceptState}
+                            onChange={event => setNameState(event.target.value)}
+                            value={nameState}
                         />
-                        <label>Description</label>
+                        <label>Meaning</label>
                         <input
                             type="text"
                             placeholder="Description"
-                            onChange={event => setDescriptionState(event.target.value)}
-                            value={descriptionState}
+                            onChange={event => setMeaningState(event.target.value)}
+                            value={meaningState}
                         />
-                        <label>Form</label>
-                        <input
-                            type="text"
-                            placeholder="Form"
-                            onChange={event => setFormState(event.target.value)}
-                            value={formState}
-                        />
-                        <label>Type</label>
-                        <input
-                            type="text"
-                            placeholder="Type"
-                            onChange={event => setTypeState(event.target.value)}
-                            value={typeState}
-                        />
-                        <label>ApplicationArea</label>
+
+                        {/* <label>ApplicationArea</label>
                         <input
                             type="text"
                             placeholder="Application Area"
                             onChange={event => setApplicationAreaState(event.target.value)}
                             value={applicationAreaState}
-                        />
-                        
-                     
-                        {/* <div className="input-select">
-                            <label>Form</label>
-                            <select value={formState} onChange={event =>setFormState(event.target.value)}>
-                                <option value="Journal">Journal</option>
-                                <option value="Conference">Conference</option>
-                                <option value="Workshop">Workshop</option>
-                                <option value="Others">Others</option>
+                        /> */}
+
+                        <div className="input-select">
+                            <label>Link or Node</label>
+                            <select
+                                value={conectState}
+                                onChange={(event) => setConectState(event.target.value)}
+                            >
+                                <option value="-">-</option>
+                                <option value="Link">Link</option>
+                                <option value="Node">Node</option>
                             </select>
-                        </div> */}
+                        </div>
 
                         <Button type="submit">
-                            Cadastrar Extensão
+                            Submit Construct
                         </Button>
                     </form>
                 </div>

@@ -135,8 +135,8 @@ const FormExtensionEdit = Iprops => {
 									onChange={(event) => setApplicationAreaState(event.target.value)}
 								>
                                     <option value="">-</option>
-									<option value="adaptive-systems">Adaptive Systems</option>
-									<option value="web-services">Web Services</option>
+									<option value="Adaptive Systems">Adaptive Systems</option>
+									<option value="Web Services">Web Services</option>
 									<option value="aspects">Aspects</option>
 									<option value="risks">Risks</option>
 									<option value="safety">Safety</option>

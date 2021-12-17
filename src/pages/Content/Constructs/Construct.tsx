@@ -11,12 +11,10 @@ import { storage } from '../../../services/firebase'
 import './Constructs.scss'
 
 type Construct = {
-    area: string,
-    concept: string,
-    description: string,
-    form: string,
+    name: string,
+    meaning: string,
+    conect: string,
     register: string,
-    type: string
     IdExtension?: string
     image: string,
 }
@@ -80,6 +78,9 @@ const Construct = () => {
         }
     }
 
+    useEffect(()=>{
+        console.log(construct)
+    })
 
     function isAdmin() {
         if (user === undefined) {
@@ -108,36 +109,28 @@ const Construct = () => {
         if (construct !== undefined) {
             return Object.keys(construct).map(item => {
                 if (construct[item] !== undefined) {
-                    if (item === 'area') {
-                        return <Card titulo="Application Area">
+                    if (item === 'name') {
+                        return <Card titulo="Name">
                             <span>{construct[item]}</span>
                         </Card>
                     }
-                    if (item === 'concept') {
-                        return <Card titulo="Concept">
+                    if (item === 'meaning') {
+                        return <Card titulo="Meaning">
                             <span>{construct[item]}</span>
                         </Card>
                     }
-                    if (item === 'description') {
-                        return <Card titulo="Description">
+                    if (item === 'conect') {
+                        return <Card titulo="Conect">
                             <span>{construct[item]}</span>
                         </Card>
                     }
-                    if (item === 'form') {
-                        return <Card titulo="Form">
-                            <span>{construct[item]}</span>
-                        </Card>
-                    }
+
                     if (item === 'register') {
                         return <Card titulo="Register">
                             <span>{construct[item]}</span>
                         </Card>
                     }
-                    if (item === 'type') {
-                        return <Card titulo="Type">
-                            <span>{construct[item]}</span>
-                        </Card>
-                    }
+                    
                     if (item === 'image') {
                         return <Card titulo="Image">
                             <div className="image-area">
@@ -172,15 +165,14 @@ const Construct = () => {
         const constructRef = database.ref(`extensions/${extensionId}/constructs/${constructId}`);
         constructRef.on('value', construct => {
             const databaseExtension = construct.val()
+            console.log('AQUI',databaseExtension)
             if (databaseExtension !== null) {
                 const parsedExtension = {
-                    area: databaseExtension.area,
-                    concept: databaseExtension.concept,
-                    description: databaseExtension.description,
-                    form: databaseExtension.form,
+                    name: databaseExtension.name,
+                    meaning: databaseExtension.meaning,
+                    conect: databaseExtension.conect,
                     register: databaseExtension.register,
-                    type: databaseExtension.type,
-                    image: databaseExtension.image
+                    image: databaseExtension.image    
                 }
                 setConstruct(parsedExtension)
             }
@@ -195,15 +187,6 @@ const Construct = () => {
                     {showConstruct(construct)}
                 </div>
             </Card>
-
-            {/* <div>
-                <progress value={progress} max="100" />
-                <input type="file" onChange={handleChange} />
-                <button onClick={handleUpload}>Upload</button>
-            </div> */}
-
-
-
             {admin &&
                 <div className="admin-area">
                     <Button

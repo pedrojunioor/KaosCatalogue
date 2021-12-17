@@ -20,12 +20,10 @@ type FirebaseConstructs = Record<string, {
 
 type Construct = {
     id: string,
-    area: string,
-    concept: string,
-    description: string,
-    form: string,
+    name: string,
+    meaning: string,
+    conect: string,
     register: string,
-    type: string
     IdExtension: string
 }
 
@@ -68,12 +66,10 @@ const Constructs = () => {
             if (construct !== undefined) {
                 return <div key={construct.id} className="constructs">
                     <span>{i + 1}</span>
-                    <span>{construct.area} </span>
-                    <span>{construct.concept} </span>
-                    <span>{construct.description}</span>
-                    <span>{construct.form}</span>
+                    <span>{construct.name} </span>
+                    <span>{construct.meaning} </span>
+                    <span>{construct.conect}</span>
                     <span>{construct.register}</span>
-                    <span>{construct.type}</span>
                     <Button onClick={e => handleJoinConstruct(e, construct.IdExtension, construct.id)}>Detail</Button>
                 </div>
             }
@@ -109,12 +105,10 @@ const Constructs = () => {
                 
                 return {
                     id: value.key,
-                    area: value.value.area,
-                    concept: value.value.concept,
-                    description: value.value.description,
-                    form: value.value.form,
+                    name: value.value.name,
+                    meaning: value.value.meaning,
+                    conect: value.value.conect,
                     register: value.value.register,
-                    type: value.value.type,
                     IdExtension: value.value.IdExtension
                 }
             })
@@ -125,48 +119,15 @@ const Constructs = () => {
             extensionRef.off('value')
         }
     }, [extensionId]);
-    // useEffect(() => {
-    //     const extensionRef = database.ref(`extensions`);
-    //     extensionRef.on('value', extension => {
-    //         const databaseExtension = extension.val()
-    //         const parsed = Object.entries(databaseExtension).map(([key, value]) => {
-    //             if (value.constructs) {
-    //                 console.log('CONSTRUTORES',Object.keys(value.constructs).length)
-    //                 let chave = Object.entries(value.constructs).map(([key, value]) => {
-    //                     return key
-    //                 })
-    //                 for (let i = 0; i < Object.keys(value.constructs).length; i++) {
-    //                     return {
-                            // id: chave[i],
-                            // area: Object.values(value.constructs)[i]['area'],
-                            // concept: Object.values(value.constructs)[i]['concept'],
-                            // description: Object.values(value.constructs)[i]['description'],
-                            // form: Object.values(value.constructs)[i]['form'],
-                            // register: Object.values(value.constructs)[i]['register'],
-                            // type: Object.values(value.constructs)[i]['type'],
-                            // IdExtension: Object.values(value.constructs)[i]['IdExtension']
-    //                     }
-    //                 }
-    //             }
-    //         })
-    //         setConstructs(parsed)
-    //     })
-
-    //     return () => {
-    //         extensionRef.off('value')
-    //     }
-    // }, [extensionId]);
-
+   
     return (
         <Card titulo="Constructs">
             <div className="caption-constructs">
                 <span>-</span>
-                <span>Area</span>
-                <span>Concept</span>
-                <span>Description</span>
-                <span>Form</span>
+                <span>Name</span>
+                <span>Meaning</span>
+                <span>Conect</span>
                 <span>Register</span>
-                <span>Type</span>
             </div>
             <div>
                 {getConstructs(constructs)}
