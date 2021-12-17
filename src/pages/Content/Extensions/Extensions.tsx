@@ -267,10 +267,18 @@ const Extensions = () => {
             return <div className="input-text">
                 <input
                     type="text"
+                    list="sources"
                     placeholder="Enter the Source"
                     onChange={event => { setParseState(event.target.value) }}
                     value={parseState.toString()}
                 />
+                <datalist id="sources">
+                        <option value="Journal"/>
+                        <option value="Conference"/>
+                        <option value="Workshop"/>
+                        <option value="Others"/>
+                       
+                </datalist>
             </div>
         }
         if (place === 'toolsuport') {

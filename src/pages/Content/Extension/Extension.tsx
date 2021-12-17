@@ -354,13 +354,15 @@ const Extension = () => {
             </div>}
 
             {admin && <div className="modal">
+            
                 <Modal
                     className="modal-style"
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
                     contentLabel="Example Modal">
-                    {/* <button onClick={closeModal}>close</button> */}
+                    {/* <Button onClick={closeModal}>X</Button> */}
                     <FormConstruct />
+                
                 </Modal>
             </div>}
 

@@ -26,7 +26,10 @@ const FormReport = () => {
                 link: linkState,
                 status: statusState
               
-            });
+            }
+            
+            );
+            window.alert("Create Report Succes");
             history.push(`/`);
         }
         else{
