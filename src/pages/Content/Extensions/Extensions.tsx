@@ -205,6 +205,10 @@ const Extensions = () => {
 
     }
 
+    useEffect(()=>{
+        console.log(filterState)
+        console.log(parseState)
+    },[parseState,filterState])
 
 
     function mountInput(place: string) {
@@ -245,9 +249,9 @@ const Extensions = () => {
                         <option value="Risks"/>
                         <option value="Safety"/>
                         <option value="Autonomic Systems"/>
-                        <option value="Organizational/Business Process"/>
-                        <option value="Security/Privacy/Vulnerability"/>
-                        <option value="Business continuity"/>
+                        <option value="Organizational Business Process"/>
+                        <option value="Security Privacy Vulnerability"/>
+                        <option value="Business Continuity"/>
                         <option value="Ambient Systems"/>
                         <option value="Others"/>
                 </datalist>

@@ -137,19 +137,19 @@ const FormExtensionEdit = Iprops => {
                                     <option value="">-</option>
 									<option value="Adaptive Systems">Adaptive Systems</option>
 									<option value="Web Services">Web Services</option>
-									<option value="aspects">Aspects</option>
-									<option value="risks">Risks</option>
-									<option value="safety">Safety</option>
-									<option value="autonomic-systems">Autonomic Systems</option>
-									<option value="organizational-business-process">
+									<option value="Aspects">Aspects</option>
+									<option value="Risks">Risks</option>
+									<option value="Safety">Safety</option>
+									<option value="Autonomic Systems">Autonomic Systems</option>
+									<option value="Organizational Business Process">
 										Organizational/Business Process
 									</option>
-									<option value="security-privacy-vulnerability">
+									<option value="Security Privacy Vulnerability">
 										Security/Privacy/Vulnerability
 									</option>
-									<option value="business-continuity">Business continuity</option>
-									<option value="escalabilidade">Escalabilidade</option>
-									<option value="ambient-systems">Ambient Systems</option>
+									<option value="Business Continuity">Business continuity</option>
+									<option value="Escalabilidade">Escalabilidade</option>
+									<option value="Ambient Systems">Ambient Systems</option>
 									<option value="others">Others</option>
 								</select>
 							</div>
