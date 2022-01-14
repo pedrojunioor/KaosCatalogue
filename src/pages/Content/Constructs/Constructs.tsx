@@ -43,6 +43,9 @@ const Constructs = () => {
     const extensionId = params.id;
 
     const [constructs, setConstructs] = useState<Construct[]>([])
+    const [constructsSelected, setConstructsSelected] = useState<Construct[]>([])
+    const [filterState, setFilterState] = useState('name')
+    const [parseState, setParseState] = useState<String>('')
 
 
     async function handleJoinConstruct(event: FormEvent, IdExtension: string, IdConstruct: string) {
@@ -62,6 +65,22 @@ const Constructs = () => {
     }
 
     function getConstructs(constructs: Construct[]) {
+
+        if (constructsSelected.length > 0) {
+            return constructsSelected.map((construct, i) => {
+                if (construct !== undefined) {
+                    return <div key={construct.id} className="constructs">
+                        <span>{i + 1}</span>
+                        <span>{construct.name} </span>
+                        <span>{construct.meaning} </span>
+                        <span>{construct.conect}</span>
+                        <span>{construct.register}</span>
+                        <Button onClick={e => handleJoinConstruct(e, construct.IdExtension, construct.id)}>Detail</Button>
+                    </div>
+                }
+            })
+        }
+
         return constructs.map((construct, i) => {
             if (construct !== undefined) {
                 return <div key={construct.id} className="constructs">
@@ -76,33 +95,28 @@ const Constructs = () => {
         })
     }
 
+
+
     useEffect(() => {
         const extensionRef = database.ref(`extensions`);
         extensionRef.on('value', extension => {
             const databaseExtension = extension.val()
-            let construtores : any = []
+            let construtores: any = []
             Object.entries(databaseExtension).forEach(([key, value]) => {
                 if (value.constructs) {
-                    // console.log('constructs',value.constructs)
-                    Object.entries(value.constructs).forEach(([key, value]) => {
-                        console.log('key',key)
-                    })
-             
 
-                    Object.entries(value.constructs).forEach(([key,value]) =>{
-                        console.log('key',key)
-                        console.log('value',value)
+                    Object.entries(value.constructs).forEach(([key, value]) => {
                         construtores = [
                             ...construtores,
-                            {key: key, value: value}
+                            { key: key, value: value }
                         ]
                     })
                 }
             })
-           
-         
-            const parsed = Object.entries(construtores).map(([key, value]) =>{
-                
+
+
+            const parsed = Object.entries(construtores).map(([key, value]) => {
+
                 return {
                     id: value.key,
                     name: value.value.name,
@@ -112,6 +126,7 @@ const Constructs = () => {
                     IdExtension: value.value.IdExtension
                 }
             })
+
             setConstructs(parsed)
         })
 
@@ -119,20 +134,130 @@ const Constructs = () => {
             extensionRef.off('value')
         }
     }, [extensionId]);
-   
+
+    async function handleJoinConstructsSearchNew(event: FormEvent, filter: string, parse: string) {
+        event.preventDefault();
+
+        const extensionRef = database.ref(`extensions`);
+        extensionRef.on('value', extension => {
+            const databaseExtension = extension.val()
+            let construtores: any = []
+            Object.entries(databaseExtension).forEach(([key, value]) => {
+                if (value.constructs) {
+
+                    Object.entries(value.constructs).forEach(([key, value]) => {
+                        construtores = [
+                            ...construtores,
+                            { key: key, value: value }
+                        ]
+                    })
+                }
+            })
+
+            let temp
+
+            if (filter === 'name') {
+
+                const parsed = construtores.filter(construct => construct.value.name.toLowerCase().includes(parse.toLowerCase()))
+
+                temp = parsed
+            }
+            else if (filter === 'conect') {
+                const parsed = construtores.filter(construct => construct.value.conect.toLowerCase().includes(parse.toLowerCase()))
+
+                temp = parsed
+            }
+
+            const parsed = Object.entries(temp).map(([key, value]) => {
+
+                return {
+                    id: value.key,
+                    name: value.value.name,
+                    meaning: value.value.meaning,
+                    conect: value.value.conect,
+                    register: value.value.register,
+                    IdExtension: value.value.IdExtension
+                }
+            })
+
+            setConstructs(parsed)
+        })
+
+        return () => {
+            extensionRef.off('value')
+        }
+    }
+
+    function mountInput(place: string) {
+
+        if (place === 'name') {
+            return <div className="input-text">
+                <input
+                    type="text"
+                    placeholder="Enter the Name"
+                    onChange={event => { setParseState(event.target.value) }}
+                    value={parseState.toString()}
+                />
+            </div>
+        }
+
+        if (place === 'conect') {
+            return <div className="input-text">
+                <input
+                    type="text"
+                    list="conects"
+                    // placeholder="Enter the Source"
+                    onChange={event => { setParseState(event.target.value) }}
+                    value={parseState.toString()}
+                />
+                <datalist id="conects">
+                    <option value="Link" />
+                    <option value="Node" />
+                </datalist>
+            </div>
+        }
+
+        else {
+            return <div className="input-text">
+                <input
+                    type="text"
+                    placeholder="---------"
+                    onChange={event => { setParseState(event.target.value) }}
+                    value={parseState.toString()}
+                />
+            </div>
+        }
+    }
+
     return (
-        <Card titulo="Constructs">
-            <div className="caption-constructs">
-                <span>-</span>
-                <span>Name</span>
-                <span>Meaning</span>
-                <span>Conect</span>
-                <span>Register</span>
-            </div>
-            <div>
-                {getConstructs(constructs)}
-            </div>
-        </Card>
+        <div>
+
+            <form className="menu-busca" onSubmit={e => handleJoinConstructsSearchNew(e, filterState, parseState)} >
+                <div className="input-select">
+                    <select value={filterState} onChange={(event) => { setFilterState(event.target.value) }}>
+                        <option value="name">Name</option>
+                        <option value="conect">Connect</option>
+                    </select>
+                </div>
+
+                {mountInput(filterState)}
+                <div>
+                    <Button type="submit"> Search</Button>
+                </div>
+            </form >
+            <Card titulo="Constructs">
+                <div className="caption-constructs">
+                    <span>-</span>
+                    <span>Name</span>
+                    <span>Meaning</span>
+                    <span>Conect</span>
+                    <span>Register</span>
+                </div>
+                <div>
+                    {getConstructs(constructs)}
+                </div>
+            </Card>
+        </div>
     )
 }
 
