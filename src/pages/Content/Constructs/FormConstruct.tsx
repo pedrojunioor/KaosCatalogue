@@ -68,14 +68,6 @@ const FormConstruct = () => {
                             value={meaningState}
                         />
 
-                        {/* <label>ApplicationArea</label>
-                        <input
-                            type="text"
-                            placeholder="Application Area"
-                            onChange={event => setApplicationAreaState(event.target.value)}
-                            value={applicationAreaState}
-                        /> */}
-
                         <div className="input-select">
                             <label>Link or Node</label>
                             <select

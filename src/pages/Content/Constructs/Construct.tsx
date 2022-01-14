@@ -32,6 +32,7 @@ const Construct = () => {
     const [admin, setAdmin] = useState<boolean>(false)
 
     const extensionId = params.idExtension;
+    const [extension, setExtension] = useState(undefined)
     const constructId = params.idConstruct;
 
     const [construct, setConstruct] = useState<Construct>()
@@ -78,7 +79,7 @@ const Construct = () => {
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(construct)
     })
 
@@ -105,6 +106,15 @@ const Construct = () => {
         }
     }
 
+    async function getExtension() {
+        const extension = await database.ref(`/extensions/${extensionId}`).get()
+        console.log('extension', extension.val())
+        setExtension(extension.val())
+    }
+    useEffect(() => {
+        getExtension()
+    }, [extensionId])
+
     function showConstruct(construct: Construct) {
         if (construct !== undefined) {
             return Object.keys(construct).map(item => {
@@ -130,7 +140,9 @@ const Construct = () => {
                             <span>{construct[item]}</span>
                         </Card>
                     }
-                    
+
+
+
                     if (item === 'image') {
                         return <Card titulo="Image">
                             <div className="image-area">
@@ -142,7 +154,7 @@ const Construct = () => {
                                 </div>}
 
                             </div>
-                            
+
                         </Card>
                     }
                     else {
@@ -165,14 +177,14 @@ const Construct = () => {
         const constructRef = database.ref(`extensions/${extensionId}/constructs/${constructId}`);
         constructRef.on('value', construct => {
             const databaseExtension = construct.val()
-            console.log('AQUI',databaseExtension)
+            console.log('AQUI', databaseExtension)
             if (databaseExtension !== null) {
                 const parsedExtension = {
                     name: databaseExtension.name,
                     meaning: databaseExtension.meaning,
                     conect: databaseExtension.conect,
                     register: databaseExtension.register,
-                    image: databaseExtension.image    
+                    image: databaseExtension.image
                 }
                 setConstruct(parsedExtension)
             }
@@ -183,6 +195,11 @@ const Construct = () => {
     return (
         <div className="content" >
             <Card titulo='Construct'>
+                {extension &&
+                    <Card titulo="Related Extension ">
+                        <a href={`/extension/${extensionId}`}><span>{extension.title}</span></a>
+                    </Card>
+                }
                 <div className="Cards">
                     {showConstruct(construct)}
                 </div>

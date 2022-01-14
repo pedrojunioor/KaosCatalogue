@@ -84,7 +84,6 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     }
 
     
-
     return (
         <div>
             <AuthContext.Provider value={{ user, sigInWithGoogle, logout, isLoggedIn}}>
