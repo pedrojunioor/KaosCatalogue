@@ -47,6 +47,12 @@ const Constructs = () => {
     const [filterState, setFilterState] = useState('name')
     const [parseState, setParseState] = useState<String>('')
 
+    const [qtd,setQtd] = useState(undefined)
+
+    useEffect(()=>{
+        console.log('td', qtd)
+    },[qtd])
+
 
     async function handleJoinConstruct(event: FormEvent, IdExtension: string, IdConstruct: string) {
         event.preventDefault();
@@ -65,7 +71,6 @@ const Constructs = () => {
     }
 
     function getConstructs(constructs: Construct[]) {
-
         if (constructsSelected.length > 0) {
             return constructsSelected.map((construct, i) => {
                 if (construct !== undefined) {
@@ -126,7 +131,7 @@ const Constructs = () => {
                     IdExtension: value.value.IdExtension
                 }
             })
-
+            setQtd(parsed.length)
             setConstructs(parsed)
         })
 
@@ -179,7 +184,7 @@ const Constructs = () => {
                     IdExtension: value.value.IdExtension
                 }
             })
-
+            setQtd(parsed.length)
             setConstructs(parsed)
         })
 
@@ -236,7 +241,7 @@ const Constructs = () => {
                 <div className="input-select">
                     <select value={filterState} onChange={(event) => { setFilterState(event.target.value) }}>
                         <option value="name">Name</option>
-                        <option value="conect">Connect</option>
+                        <option value="conect">Kind</option>
                     </select>
                 </div>
 
@@ -250,7 +255,7 @@ const Constructs = () => {
                     <span>-</span>
                     <span>Name</span>
                     <span>Meaning</span>
-                    <span>Conect</span>
+                    <span>Kind</span>
                     <span>Register</span>
                 </div>
                 <div>

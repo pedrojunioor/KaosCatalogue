@@ -69,7 +69,7 @@ const FormConstruct = () => {
                         />
 
                         <div className="input-select">
-                            <label>Link or Node</label>
+                            <label>Kind</label>
                             <select
                                 value={conectState}
                                 onChange={(event) => setConectState(event.target.value)}

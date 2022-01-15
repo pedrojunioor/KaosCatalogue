@@ -315,7 +315,7 @@ const Extension = () => {
                     <span>-</span>
                     <span>Name</span>
                     <span>Meaning</span>
-                    <span>Conect</span>
+                    <span>Kind</span>
                     <span>Register</span>
 
                 </div>

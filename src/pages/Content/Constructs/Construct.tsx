@@ -130,7 +130,7 @@ const Construct = () => {
                         </Card>
                     }
                     if (item === 'conect') {
-                        return <Card titulo="Conect">
+                        return <Card titulo="Kind">
                             <span>{construct[item]}</span>
                         </Card>
                     }
