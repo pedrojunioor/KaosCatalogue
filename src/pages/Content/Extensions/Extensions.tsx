@@ -72,6 +72,11 @@ const Extensions = () => {
                 setParseState('YES')
             }
         }
+        if (filterState === 'source') {
+            if (parseState.trim() === '') {
+                setParseState('journal')
+            }
+        }
         else {
             setParseState('')
         }
@@ -212,13 +217,13 @@ const Extensions = () => {
                 }
             })
             setExtensions(selectedExtension)
-            if(selectedExtension.length === 0){
+            if (selectedExtension.length === 0) {
                 setParseState('')
             }
-       
+
         })
 
-      
+
 
     }
 
@@ -251,28 +256,53 @@ const Extensions = () => {
             </div>
         }
         if (place === 'applicationArea') {
-            return <div className="input-text">
-                <input
-                    type="text"
-                    list="areas"
-                    placeholder="Enter the Application Area"
-                    onChange={event => { setParseState(event.target.value) }}
+            return <div className="input-select">
+                <select
                     value={parseState.toString()}
-                />
-                <datalist id="areas">
-                    <option value="Adaptive Systems" />
-                    <option value="Web Services" />
-                    <option value="Aspects" />
-                    <option value="Risks" />
-                    <option value="Safety" />
-                    <option value="Autonomic Systems" />
-                    <option value="Organizational Business Process" />
-                    <option value="Security Privacy Vulnerability" />
-                    <option value="Business Continuity" />
-                    <option value="Ambient Systems" />
-                    <option value="Others" />
-                </datalist>
+                    onChange={(event) => setParseState(event.target.value)}
+                >
+                    <option value="">-</option>
+                    <option value="Adaptive Systems">Adaptive Systems</option>
+                    <option value="Web Services">Web Services</option>
+                    <option value="Aspects">Aspects</option>
+                    <option value="Risks">Risks</option>
+                    <option value="Safety">Safety</option>
+                    <option value="Autonomic Systems">Autonomic Systems</option>
+                    <option value="Organizational Business Process">
+                        Organizational/Business Process
+                    </option>
+                    <option value="Security Privacy Vulnerability">
+                        Security/Privacy/Vulnerability
+                    </option>
+                    <option value="business-continuity">Business continuity</option>
+                    <option value="Escalabilidade">Escalabilidade</option>
+                    <option value="Ambient Systems">Ambient Systems</option>
+                    <option value="Others">Others</option>
+                </select>
             </div>
+
+            // <div className="input-text">
+            //     <input
+            //         type="text"
+            //         list="areas"
+            //         placeholder="Enter the Application Area"
+            //         onChange={event => { setParseState(event.target.value) }}
+            //         value={parseState.toString()}
+            //     />
+            //     <datalist id="areas">
+            //         <option value="Adaptive Systems" />
+            //         <option value="Web Services" />
+            //         <option value="Aspects" />
+            //         <option value="Risks" />
+            //         <option value="Safety" />
+            //         <option value="Autonomic Systems" />
+            //         <option value="Organizational Business Process" />
+            //         <option value="Security Privacy Vulnerability" />
+            //         <option value="Business Continuity" />
+            //         <option value="Ambient Systems" />
+            //         <option value="Others" />
+            //     </datalist>
+            // </div>
         }
         if (place === 'datePublication') {
             return <div className="input-text">
@@ -285,22 +315,31 @@ const Extensions = () => {
             </div>
         }
         if (place === 'source') {
-            return <div className="input-text">
-                <input
-                    type="text"
-                    list="sources"
-                    placeholder="Enter the Source"
-                    onChange={event => { setParseState(event.target.value) }}
-                    value={parseState.toString()}
-                />
-                <datalist id="sources">
-                    <option value="Journal" />
-                    <option value="Conference" />
-                    <option value="Workshop" />
-                    <option value="Others" />
-
-                </datalist>
+            return <div className="input-select">
+                <select value={parseState.toString()} onChange={(event) => setParseState(event.target.value)}>
+                    <option value="journal">Journal</option>
+                    <option value="conference">Conference</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="others">Others</option>
+                </select>
             </div>
+
+            // <div className="input-text">
+            //     <input
+            //         type="text"
+            //         list="sources"
+            //         placeholder="Enter the Source"
+            //         onChange={event => { setParseState(event.target.value) }}
+            //         value={parseState.toString()}
+            //     />
+            //     <datalist id="sources">
+            //         <option value="Journal" />
+            //         <option value="Conference" />
+            //         <option value="Workshop" />
+            //         <option value="Others" />
+
+            //     </datalist>
+            // </div>
         }
         if (place === 'toolsuport') {
 
@@ -310,14 +349,6 @@ const Extensions = () => {
                     <option value="NOT">NOT</option>
                 </select>
             </div>
-            // return <div className="input-text">
-            //     <input
-            //         type="text"
-            //         placeholder="Enter YES or NOT"
-            //         onChange={event => { setParseState(event.target.value) }}
-            //         value={parseState.toString()}
-            //     />
-            // </div>
         }
         else {
             return <div className="input-text">
@@ -356,7 +387,10 @@ const Extensions = () => {
                     <Button type="submit"> Search</Button>
                 </div>
             </form >
-
+            {getExtensions(extensions).length > 0 &&
+                <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '10px 40px' }}>
+                    <h1 style={{ border: '1px solid #000', padding: '8px', borderRadius: '10px' }}>Showing {getExtensions(extensions).length}  results found </h1>
+                </div>}
             {getExtensions(extensions).length > 0 ? <Card titulo="Extensions">
                 <div className="caption-extensions">
                     <span>-</span>
