@@ -274,7 +274,7 @@ const Extensions = () => {
                     <option value="Security Privacy Vulnerability">
                         Security/Privacy/Vulnerability
                     </option>
-                    <option value="business-continuity">Business continuity</option>
+                    <option value="Business continuity">Business continuity</option>
                     <option value="Escalabilidade">Escalabilidade</option>
                     <option value="Ambient Systems">Ambient Systems</option>
                     <option value="Others">Others</option>
