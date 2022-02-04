@@ -66,6 +66,18 @@ const Extensions = () => {
     const [selected, setSelected] = useState<Extension[]>([])
 
 
+    useEffect(() => {
+        if (filterState === 'toolsuport') {
+            if (parseState.trim() === '') {
+                setParseState('YES')
+            }
+        }
+        else {
+            setParseState('')
+        }
+    }, [filterState])
+
+
     function getExtensions(extensions: Extension[]) {
         return extensions.map((extension, i) => {
             return <div key={extension.title} className="extensions">
@@ -200,15 +212,20 @@ const Extensions = () => {
                 }
             })
             setExtensions(selectedExtension)
+            if(selectedExtension.length === 0){
+                setParseState('')
+            }
+       
         })
 
+      
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(filterState)
         console.log(parseState)
-    },[parseState,filterState])
+    }, [parseState, filterState])
 
 
     function mountInput(place: string) {
@@ -242,18 +259,18 @@ const Extensions = () => {
                     onChange={event => { setParseState(event.target.value) }}
                     value={parseState.toString()}
                 />
-                 <datalist id="areas">
-                        <option value="Adaptive Systems"/>
-                        <option value="Web Services"/>
-                        <option value="Aspects"/>
-                        <option value="Risks"/>
-                        <option value="Safety"/>
-                        <option value="Autonomic Systems"/>
-                        <option value="Organizational Business Process"/>
-                        <option value="Security Privacy Vulnerability"/>
-                        <option value="Business Continuity"/>
-                        <option value="Ambient Systems"/>
-                        <option value="Others"/>
+                <datalist id="areas">
+                    <option value="Adaptive Systems" />
+                    <option value="Web Services" />
+                    <option value="Aspects" />
+                    <option value="Risks" />
+                    <option value="Safety" />
+                    <option value="Autonomic Systems" />
+                    <option value="Organizational Business Process" />
+                    <option value="Security Privacy Vulnerability" />
+                    <option value="Business Continuity" />
+                    <option value="Ambient Systems" />
+                    <option value="Others" />
                 </datalist>
             </div>
         }
@@ -277,23 +294,30 @@ const Extensions = () => {
                     value={parseState.toString()}
                 />
                 <datalist id="sources">
-                        <option value="Journal"/>
-                        <option value="Conference"/>
-                        <option value="Workshop"/>
-                        <option value="Others"/>
-                       
+                    <option value="Journal" />
+                    <option value="Conference" />
+                    <option value="Workshop" />
+                    <option value="Others" />
+
                 </datalist>
             </div>
         }
         if (place === 'toolsuport') {
-            return <div className="input-text">
-                <input
-                    type="text"
-                    placeholder="Enter YES or NOT"
-                    onChange={event => { setParseState(event.target.value) }}
-                    value={parseState.toString()}
-                />
+
+            return <div className="input-select" >
+                <select value={parseState.toString()} onChange={(event) => setParseState(event.target.value)}>
+                    <option value="YES">YES</option>
+                    <option value="NOT">NOT</option>
+                </select>
             </div>
+            // return <div className="input-text">
+            //     <input
+            //         type="text"
+            //         placeholder="Enter YES or NOT"
+            //         onChange={event => { setParseState(event.target.value) }}
+            //         value={parseState.toString()}
+            //     />
+            // </div>
         }
         else {
             return <div className="input-text">
@@ -305,6 +329,12 @@ const Extensions = () => {
                 />
             </div>
         }
+    }
+
+    function notFound() {
+        return <Card>
+            <h1 style={{ font: 'bold' }}>Extension not found</h1>
+        </Card>
     }
 
     return (
@@ -320,14 +350,14 @@ const Extensions = () => {
                         <option value="toolsuport">Tool Support</option>
                     </select>
                 </div>
-    
+
                 {mountInput(filterState)}
                 <div>
                     <Button type="submit"> Search</Button>
                 </div>
             </form >
 
-            <Card titulo="Extensions">
+            {getExtensions(extensions).length > 0 ? <Card titulo="Extensions">
                 <div className="caption-extensions">
                     <span>-</span>
                     <span>Title</span>
@@ -337,10 +367,11 @@ const Extensions = () => {
                 </div>
                 <div>
                     {getExtensions(extensions)}
+
                 </div>
-            </Card>
+            </Card> : notFound()}
             <div>
-                
+
             </div>
         </div >
     )
